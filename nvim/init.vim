@@ -40,6 +40,10 @@ Plug 'w0rp/ale'
 
 " Python "tags" in a tagbar
 Plug 'majutsushi/tagbar'
+
+" Vim Substitute as operator plugin
+Plug 'kana/vim-operator-user'	" dependency of vim-operator-substitute
+Plug 'milsen/vim-operator-substitute'
  
 " Toggle comments with tcc
 Plug 'tomtom/tcomment_vim'
@@ -400,7 +404,9 @@ augroup configgroup
 " 	autocmd FileType xml setlocal foldmethod=syntax
 " 	autocmd FileType xml setlocal shiftwidth=4 expandtab ts=4 smarttab
 "
-" 	autocmd BufNewFile,BufRead *.pt setlocal filetype=xml sw=2 ts=2 expandtab
+ 	autocmd BufNewFile,BufRead *.pt setlocal filetype=html
+	autocmd BufNewFile,BufRead *.vue setlocal filetype=html
+
 	autocmd BufNewFile,BufRead *.zcml setlocal filetype=xml
 "
 " 	autocmd FileType java setlocal noexpandtab
