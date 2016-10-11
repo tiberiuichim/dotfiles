@@ -42,7 +42,7 @@ Plug 'w0rp/ale'
 Plug 'majutsushi/tagbar'
 
 " Better (python including) text objects, folding and m ore
-Plug 'tweekmonster/braceless.vim'
+" Plug 'tweekmonster/braceless.vim'
 
 
 " Vim Substitute as operator plugin
@@ -440,7 +440,7 @@ augroup configgroup
   	autocmd VimEnter *.py nested TagbarOpen
 	autocmd FileType python BracelessEnable +indent +fold +highlight
 
-	autocmd FileType haml,yaml,coffee BracelessEnable +indent +fold +highlight
+	" autocmd FileType haml,yaml,coffee BracelessEnable +indent +fold +highlight
 
 " 	autocmd FileType python setlocal foldmethod=indent
 " 	autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
