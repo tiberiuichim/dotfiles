@@ -38,8 +38,12 @@ Plug 'airblade/vim-gitgutter'
 " or https://github.com/neomake/neomake
 Plug 'w0rp/ale'
 
-" Python "tags" in a tagbar
+" Python 'tags' in a tagbar
 Plug 'majutsushi/tagbar'
+
+" Better (python including) text objects, folding and m ore
+Plug 'tweekmonster/braceless.vim'
+
 
 " Vim Substitute as operator plugin
 Plug 'kana/vim-operator-user'	" dependency of vim-operator-substitute
@@ -428,17 +432,20 @@ augroup configgroup
 " 	autocmd FileType ruby setlocal commentstring=#\ %s
 "
   	autocmd FileType python setlocal commentstring=#\ %s
-  	autocmd Filetype python setlocal ts=4 sw=4 expandtab smarttab autoindent
+  	autocmd Filetype python setlocal ts=4 sw=4 expandtab smarttab
   	autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
   	autocmd FileType python match Excess /\%120v.*/
   	autocmd FileType python setlocal nowrap
   	autocmd FileType python setlocal foldlevel=99
   	autocmd VimEnter *.py nested TagbarOpen
-" 	"
-" 	" autocmd FileType python setlocal foldmethod=indent
-" 	" autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-" 	" autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-" 	"autocmd FileType python setlocal foldlevelstart=1
+	autocmd FileType python BracelessEnable +indent +fold +highlight
+
+	autocmd FileType haml,yaml,coffee BracelessEnable +indent +fold +highlight
+
+" 	autocmd FileType python setlocal foldmethod=indent
+" 	autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+" 	autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+" 	autocmd FileType python setlocal foldlevelstart=1
 "
 " 	autocmd BufNewFile,BufRead *.css.dtml setlocal filetype=css
 "
