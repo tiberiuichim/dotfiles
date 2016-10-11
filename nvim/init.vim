@@ -403,7 +403,7 @@ augroup configgroup
 	autocmd!
 " 	autocmd VimEnter * highlight clear SignColumn
 "
-" 	autocmd BufWritePre *.php,*.py,*.js,*.txt,*.hs,*.java,*.md :call <SID>StripTrailingWhitespaces()
+	autocmd BufWritePre *.php,*.py,*.js,*.txt,*.hs,*.java,*.md :call <SID>StripTrailingWhitespaces()
 "
 " 	autocmd FileType xml setlocal foldmethod=syntax
 " 	autocmd FileType xml setlocal shiftwidth=4 expandtab ts=4 smarttab
