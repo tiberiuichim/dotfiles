@@ -245,9 +245,10 @@ if (empty($TMUX))
   endif
 endif
 
-colorscheme flatcolor
+" colorscheme flatcolor
 " colorscheme alduin
-highlight Normal guibg=black
+colorscheme flatcolor
+highlight Normal guibg=#000000
 
 " not really, nvim has no gui, just to remind myself what font I use
 set guifont=LiterationMonoPowerline\ Nerd\ Font
