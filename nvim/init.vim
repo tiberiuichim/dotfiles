@@ -65,6 +65,8 @@ Plug 'AlessandroYorba/Alduin'
 Plug 'AlessandroYorba/Sierra'
 Plug 'AlessandroYorba/Despacio'
 
+" Preview css colors
+Plug 'ap/vim-css-color'
 
 " Nice colors in status bar
 Plug 'itchyny/lightline.vim'
@@ -98,7 +100,8 @@ set autoindent
 set backspace=indent,eol,start
 set complete-=i
 set smarttab
-set ts=4	" not liking big tabs
+set tabstop=4	" not liking big tabs
+set shiftwidth=4
 
 set nrformats-=octal
 
@@ -279,6 +282,7 @@ let g:ale_linters = {
 \   'python': ['flake8'],
 \}
 let g:ale_sign_column_always = 1
+let g:ale_lint_on_save = 1
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -384,7 +388,7 @@ endfunction
 let g:lightline = {
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename', 'modified' ] ],
+      \   'left': [ [ 'mode', 'paste', 'alestatus' ], [ 'fugitive', 'filename', 'modified' ] ],
       \   'right': [['percent'], ['lineinfo']]
       \ },
       \ 'component_function': {
@@ -396,14 +400,20 @@ let g:lightline = {
       \   'fileformat': 'LightLineFileformat',
       \   'fileencoding': 'LightLineFileencoding',
       \   'mode': 'LightLineMode',
+      \   'alestatus': 'LightLineAleStatus',
       \ },
       \ 'component': {
       \   'readonly': '%{&readonly?"":""}',
       \ },
+	  \ 'component_type': {
+      \ 	'alestatus': 'error',
+	  \ },
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' },
       \ }
 
+" TODO: make the alestatus work properly, show as error
+"
 " function! MyFiletype()
 " 	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . '' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 " endfunction
@@ -411,6 +421,10 @@ let g:lightline = {
 " function! MyFileformat()
 " 	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 " endfunction
+"
+function! LightLineAleStatus()
+	return ('' != ALEGetStatusLine() ? '-ALE-' . ALEGetStatusLine() : '-|-')
+endfunction
 
 function! LightLineModified()
 	return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
