@@ -52,7 +52,7 @@ Plug 'majutsushi/tagbar'
 " Vim Substitute as operator plugin
 Plug 'kana/vim-operator-user'	" dependency of vim-operator-substitute
 Plug 'milsen/vim-operator-substitute'
- 
+
 " Toggle comments with tcc
 Plug 'tomtom/tcomment_vim'
 
@@ -291,6 +291,9 @@ let g:NERDTreeIndicatorMapCustom = {
 			\ }
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.egg-info$', '\~$', '\.git$', '\.eggs']
 
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+
 " toggle gundo
 nnoremap <leader>u :GundoToggle<CR>
 
@@ -350,8 +353,8 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 
 " }}}
- 
-" ---- Airline configuration ---- {{{ 
+
+" ---- Airline configuration ---- {{{
 " TODO: explain, test and understand this stuff
 let g:lightline = {
       \ 'mode_map': { 'c': 'NORMAL' },
@@ -418,9 +421,9 @@ endfunction
 
 " }}}
 
-" ---- Stuff that's commented ---- {{{  
+" ---- Stuff that's commented ---- {{{
 
- 
+
 " To test for fullcolor support in terminal:
 " awk 'BEGIN{
 "     s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;
@@ -452,11 +455,11 @@ endfunction
 
 "
 " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-" " insert mode - line 
-" let &t_SI .= "<Esc>[5 q" 
-" "replace mode - underline 
-" "let &t_SR .= "<Esc>[4 q" 
-" "common - block 
+" " insert mode - line
+" let &t_SI .= "<Esc>[5 q"
+" "replace mode - underline
+" "let &t_SR .= "<Esc>[4 q"
+" "common - block
 " let &t_EI .= "<Esc>[3 q"
 
 
@@ -585,16 +588,16 @@ endfunction
 " http://www.calmar.ws/dotfiles/dotfiledir/calmar256-dark.vim
 " set t_Co=256
 "
-" default value is "normal", Setting this option to "high" or "low" does use the 
-" same Solarized palette but simply shifts some values up or down in order to 
+" default value is "normal", Setting this option to "high" or "low" does use the
+" same Solarized palette but simply shifts some values up or down in order to
 " expand or compress the tonal range displayed.
 " let g:neosolarized_contrast = "high"
-" Special characters such as trailing whitespace, tabs, newlines, when displayed 
-" using ":set list" can be set to one of three levels depending on your needs. 
+" Special characters such as trailing whitespace, tabs, newlines, when displayed
+" using ":set list" can be set to one of three levels depending on your needs.
 " Default value is "normal". Provide "high" and "low" options.
 " let g:neosolarized_visibility = "normal"
 
-" If you wish to enable/disable Solarized from displaying bold, underlined or italicized 
+" If you wish to enable/disable Solarized from displaying bold, underlined or italicized
 " typefaces, simply assign 1 or 0 to the appropriate variable.
 " let g:neosolarized_bold = 1
 " let g:neosolarized_underline = 1
