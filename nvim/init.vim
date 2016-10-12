@@ -229,21 +229,6 @@ set splitright
 " colo molokai
 set termguicolors
 
-" buftabline configuration
-let g:buftabline_numbers = 2 	" show buffer position next to each buffer label
-" use \1 to go to tab 1
-nmap <leader>1 <Plug>BufTabLine.Go(1)
-nmap <leader>2 <Plug>BufTabLine.Go(2)
-nmap <leader>3 <Plug>BufTabLine.Go(3)
-nmap <leader>4 <Plug>BufTabLine.Go(4)
-nmap <leader>5 <Plug>BufTabLine.Go(5)
-nmap <leader>6 <Plug>BufTabLine.Go(6)
-nmap <leader>7 <Plug>BufTabLine.Go(7)
-nmap <leader>8 <Plug>BufTabLine.Go(8)
-nmap <leader>9 <Plug>BufTabLine.Go(9)
-nmap <leader>0 <Plug>BufTabLine.Go(10)
-
-
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
 "(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
@@ -264,11 +249,28 @@ colorscheme flatcolor
 " colorscheme alduin
 highlight Normal guibg=black
 
+" not really, nvim has no gui, just to remind myself what font I use
+set guifont=LiterationMonoPowerline\ Nerd\ Font
+
 " }}}
 
 " ---- Plugin configurations --- {{{
 
 runtime! macros/matchit.vim
+
+" buftabline configuration
+let g:buftabline_numbers = 2 	" show buffer position next to each buffer label
+" use \1 to go to tab 1
+nmap <leader>1 <Plug>BufTabLine.Go(1)
+nmap <leader>2 <Plug>BufTabLine.Go(2)
+nmap <leader>3 <Plug>BufTabLine.Go(3)
+nmap <leader>4 <Plug>BufTabLine.Go(4)
+nmap <leader>5 <Plug>BufTabLine.Go(5)
+nmap <leader>6 <Plug>BufTabLine.Go(6)
+nmap <leader>7 <Plug>BufTabLine.Go(7)
+nmap <leader>8 <Plug>BufTabLine.Go(8)
+nmap <leader>9 <Plug>BufTabLine.Go(9)
+nmap <leader>0 <Plug>BufTabLine.Go(10)
 
 " asynchronous lint engine (ale) settings
 let g:ale_linters = {
