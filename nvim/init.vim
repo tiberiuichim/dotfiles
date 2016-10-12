@@ -110,8 +110,8 @@ highlight SpellBad term=underline gui=undercurl guisp=Orange
 set ttimeout
 set ttimeoutlen=100
 
-set hlsearch
-set noincsearch
+set hlsearch		" highlight search matches
+set noincsearch		" jumps to first match as you type
 
 " Use <C-L> to clear the highlighting of :set hlsearch.
 if maparg('<C-L>', 'n') ==# ''
@@ -160,8 +160,8 @@ set showmode
 set showcmd
 
 " when searching, ignore case if all letters lowercase
-set ignorecase
-set smartcase
+" set ignorecase
+" set smartcase		" override ignorecase if term has caps
 set showmatch
 
 set listchars=tab:▸\ ,eol:¬
