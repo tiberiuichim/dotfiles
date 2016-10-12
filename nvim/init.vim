@@ -84,10 +84,6 @@ Plug 'ap/vim-buftabline'
 " Adds :Gundo, a visual tree of the undo
 Plug 'sjl/gundo.vim'
 "
-" Adds file icons in NerdTree, airline, unite, vim-startify, etc
-" It should be loaded last!
-Plug 'ryanoasis/vim-devicons'
-
 call plug#end()
 
 " }}}
@@ -256,6 +252,9 @@ highlight Normal guibg=black
 " not really, nvim has no gui, just to remind myself what font I use
 set guifont=LiterationMonoPowerline\ Nerd\ Font
 
+set nuw=6				" increase size of gutter column
+set foldcolumn=1		" increase size of fold column
+
 " }}}
 
 " ---- Plugin configurations --- {{{
@@ -309,17 +308,6 @@ let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.egg-info$', '\~$', '\.git$', '\.egg
 
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-
-" vim-devicons confiration
-" whether or not to show the nerdtree brackets around flags
-let g:webdevicons_conceal_nerdtree_brackets = 1
-" the amount of space to use after the glyph character (default ' ')
-let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
-" Force extra padding in NERDTree so that the filetype icons line up vertically
-let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
-" use double-width(1) or single-width(0) glyphs
-" only manipulates padding, has no effect on terminal or set(guifont) font
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
 
 " toggle gundo
 nnoremap <leader>u :GundoToggle<CR>
@@ -388,7 +376,7 @@ endfunction
 let g:lightline = {
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste', 'alestatus' ], [ 'fugitive', 'filename', 'modified' ] ],
+      \   'left': [ [ 'mode', 'paste'], [ 'alestatus' ], [ 'fugitive', 'filename', 'modified' ] ],
       \   'right': [['percent'], ['lineinfo']]
       \ },
       \ 'component_function': {
@@ -422,6 +410,7 @@ let g:lightline = {
 " 	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 " endfunction
 "
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 function! LightLineAleStatus()
 	return ('' != ALEGetStatusLine() ? '-ALE-' . ALEGetStatusLine() : '-|-')
 endfunction
@@ -778,5 +767,19 @@ endfunction
 " call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 " call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 " call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
+" vim-devicons confiration
+" whether or not to show the nerdtree brackets around flags
+" let g:webdevicons_conceal_nerdtree_brackets = 1
+" " the amount of space to use after the glyph character (default ' ')
+" let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
+" " Force extra padding in NERDTree so that the filetype icons line up vertically
+" let g:WebDevIconsNerdTreeGitPluginForceVAlign = 0
+" " use double-width(1) or single-width(0) glyphs
+" " only manipulates padding, has no effect on terminal or set(guifont) font
+" let g:WebDevIconsUnicodeGlyphDoubleWidth = 0
+" Adds file icons in NerdTree, airline, unite, vim-startify, etc
+" It should be loaded last!
+" Plug 'ryanoasis/vim-devicons'
 
 " }}}
