@@ -60,10 +60,18 @@ Plug 'tomtom/tcomment_vim'
 Plug 'editorconfig/editorconfig-vim'
 
 " Colorthemes
-Plug 'MaxSt/FlatColor'
 Plug 'AlessandroYorba/Alduin'
-Plug 'AlessandroYorba/Sierra'
 Plug 'AlessandroYorba/Despacio'
+Plug 'AlessandroYorba/Sierra'
+Plug 'MaxSt/FlatColor'
+Plug 'chriskempson/tomorrow-theme', {'rtp':'vim'}
+Plug 'iCyMind/NeoSolarized'
+Plug 'jacoborus/tender.vim'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'joshdick/onedark.vim'
+Plug 'nanotech/jellybeans.vim'
+Plug 'rakr/vim-two-firewatch'
+Plug 'romainl/Apprentice'
 
 " Preview css colors
 Plug 'ap/vim-css-color'
@@ -404,14 +412,6 @@ let g:lightline = {
 
 " TODO: make the alestatus work properly, show as error
 "
-" function! MyFiletype()
-" 	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . '' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-" endfunction
-"
-" function! MyFileformat()
-" 	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-" endfunction
-"
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 function! LightLineAleStatus()
 	return ('' != ALEGetStatusLine() ? '-ALE-' . ALEGetStatusLine() : '-|-')
@@ -428,12 +428,8 @@ endfunction
 function! LightLineFilename()
   " let fname = expand('%:t')
   let fname = expand('%:t')
-  return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-        \ fname == '__Tagbar__' ? g:lightline.fname :
+  return fname == '__Tagbar__' ? g:lightline.fname :
         \ fname =~ '__Gundo\|NERD_tree' ? '' :
-        \ &ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \ &ft == 'unite' ? unite#get_status_string() :
-        \ &ft == 'vimshell' ? vimshell#get_status_string() :
         \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
         \ ('' != fname ? fname : '[No Name]') .
         \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
@@ -623,7 +619,6 @@ endfunction
 " Plug 'tpope/vim-sensible'
 " Plug 'klen/python-mode'
 " Plug 'tmhedberg/SimpylFold'
-" Plug 'chriskempson/tomorrow-theme', {'rtp':'vim'}
 " Plug 'vim-scripts/calmar256-lightdark.vim'
 " Buffers integration with tabs and windows
 " Plug 'bling/vim-bufferline'
@@ -633,13 +628,6 @@ endfunction
 " Rainbow parantheses
 " Plug 'kien/rainbow_parentheses.vim'
 " Plug 'luochen1990/rainbow'
-" Plug 'iCyMind/NeoSolarized'
-" Plug 'rakr/vim-two-firewatch'
-" Plug 'romainl/Apprentice'
-" Plug 'jonathanfilip/vim-lucius'
-" Plug 'nanotech/jellybeans.vim'
-" Plug 'joshdick/onedark.vim'
-" Plug 'jacoborus/tender.vim'
 
 " http://www.calmar.ws/dotfiles/dotfiledir/calmar256-dark.vim
 " set t_Co=256
@@ -660,9 +648,6 @@ endfunction
 " let g:neosolarized_italic = 0
 " let g:solarized_termcolors=256
 " let g:solarized_termtrans=1
-" colo Tomorrow-Night-Bright
-" set background=dark
-" colo calmar256-dark
 "
 " set encoding=utf-8
 " Remember info about open buffers on close
@@ -682,13 +667,17 @@ endfunction
 " autocmd FileType python BracelessEnable +indent +fold +highlight
 " autocmd FileType python RainbowParenthesesToggle
 
-" set background=dark
-"highlight Normal guibg=black guifg=white
+" colo Tomorrow-Night-Bright
+" colo calmar256-dark
 " colorscheme NeoSolarized
-"colorscheme lucius
-"colorscheme onedark
+" colorscheme lucius
+" colorscheme onedark
 " highlight LineNr guibg=black
+" highlight Normal guibg=black guifg=white
 " highlight SignColumn guibg=black
+" set background=dark
+" set background=dark
+"
 " autocmd vimenter * NERDTree
 
 " function! VisualSelection(direction) range
@@ -723,13 +712,12 @@ endfunction
 " 	autocmd FileType java setlocal noexpandtab
 " 	autocmd FileType java setlocal list
 " 	autocmd FileType java setlocal listchars=tab:+\ ,eol:-
-" 	autocmd FileType java setlocal formatprg=par\ -w80\ -T4
+" 	autocmd FileType java setlocal formatprg=par\ -w75\ -T4
 "
 " 	autocmd FileType php setlocal expandtab
 " 	autocmd FileType php setlocal list
 " 	autocmd FileType php setlocal listchars=tab:+\ ,eol:-
 " 	autocmd FileType php setlocal formatprg=par\ -w80\ -T4
-"
 "
 	" autocmd FileType haml,yaml,coffee BracelessEnable +indent +fold +highlight
 
@@ -769,6 +757,15 @@ endfunction
 " call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 " call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 " call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+"
+" function! MyFiletype()
+" 	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . '' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+" endfunction
+"
+" function! MyFileformat()
+" 	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+" endfunction
+"
 
 " vim-devicons confiration
 " whether or not to show the nerdtree brackets around flags
