@@ -61,6 +61,10 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Colorthemes
 Plug 'MaxSt/FlatColor'
+Plug 'AlessandroYorba/Alduin'
+Plug 'AlessandroYorba/Sierra'
+Plug 'AlessandroYorba/Despacio'
+
 
 " Nice colors in status bar
 Plug 'itchyny/lightline.vim'
@@ -77,6 +81,10 @@ Plug 'ap/vim-buftabline'
 
 " Adds :Gundo, a visual tree of the undo
 Plug 'sjl/gundo.vim'
+"
+" Adds file icons in NerdTree, airline, unite, vim-startify, etc
+" It should be loaded last!
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -253,6 +261,7 @@ if (empty($TMUX))
 endif
 
 colorscheme flatcolor
+" colorscheme alduin
 highlight Normal guibg=black
 
 " }}}
