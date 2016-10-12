@@ -327,6 +327,12 @@ let g:ale_linters = {
 \}
 let g:ale_sign_column_always = 1
 
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+" dont jump to quickfix window immediately
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack!<Space>
 
 " Auto-open NerdTree on all vims
 " autocmd vimenter * NERDTree
