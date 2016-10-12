@@ -17,27 +17,28 @@ endif
 " 	:PlugClean!
 " NOTE: Make sure you use single quotes when defining Plug
 
-
 call plug#begin('~/.vim/plugged')
 
 " The inimitable NerdTree
 Plug 'scrooloose/nerdtree'
+
+" Show git status icons for files, in NerdTree
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " BufferBye, gives :Bdelete command to delete buffers
 Plug 'moll/vim-bbye'
-
-" Everything programming language syntax and indent
-Plug 'sheerun/vim-polyglot'
-
+"
 " Show git status stull in guter column (next to numbers)
 Plug 'airblade/vim-gitgutter'
 
-" Show marks in gutter, delete mark with dm<x>
+" Show marks in gutter
 Plug 'kshenoy/vim-signature'
 
 " Git integration, do :Gdiff, :Gblame, :Gremove and more
 Plug 'tpope/vim-fugitive'
+
+" Everything programming language syntax and indent
+Plug 'sheerun/vim-polyglot'
 
 " ALE (Asynchronous Lint Engine) is a plugin for providing linting in NeoVim
 " and Vim 8 while you edit your text files.
@@ -47,9 +48,6 @@ Plug 'w0rp/ale'
 
 " Python 'tags' in a tagbar
 Plug 'majutsushi/tagbar'
-
-" Better (python including) text objects, folding and m ore
-" Plug 'tweekmonster/braceless.vim'
 
 " Vim Substitute as operator plugin
 Plug 'kana/vim-operator-user'	" dependency of vim-operator-substitute
@@ -70,44 +68,23 @@ Plug 'itchyny/lightline.vim'
 " Use :Ack to search with ag
 Plug 'mileszs/ack.vim'
 
+" The :EasyAlign command
 Plug 'junegunn/vim-easy-align'
 
 " Tabline / bufferline plugins. Not all of them work with airline
 " See vim-buftabline github page for alternatives
 Plug 'ap/vim-buftabline'
 
-", { 'on':  'NERDTreeToggle' }
-" Plug 'tpope/vim-sensible'
-" Plug 'klen/python-mode'
-" Plug 'tmhedberg/SimpylFold'
-" Plug 'chriskempson/tomorrow-theme', {'rtp':'vim'}
-" Plug 'vim-scripts/calmar256-lightdark.vim'
-" Buffers integration with tabs and windows
-" Plug 'bling/vim-bufferline'
-" Plug 'zefei/vim-wintabs'
-" Group dependencies, vim-snippets depends on ultisnips
-" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-" Rainbow parantheses
-" Plug 'kien/rainbow_parentheses.vim'
-" Plug 'luochen1990/rainbow'
-" Plug 'iCyMind/NeoSolarized'
-" Plug 'rakr/vim-two-firewatch'
-" Plug 'romainl/Apprentice'
-" Plug 'jonathanfilip/vim-lucius'
-" Plug 'nanotech/jellybeans.vim'
-" Plug 'joshdick/onedark.vim'
-" Plug 'jacoborus/tender.vim'
+" Adds :Gundo, a visual tree of the undo
+Plug 'sjl/gundo.vim'
 
 call plug#end()
 
-" http://www.calmar.ws/dotfiles/dotfiledir/calmar256-dark.vim
-" set t_Co=256
-
-filetype plugin indent on
-
 " }}}
 
-" Settings lifted from sensible.vim {{{
+" ---- Personal preferences ---- {{{
+"
+" Some of this stuff is lifted from sensible.vim
 
 set autoindent
 set backspace=indent,eol,start
@@ -145,15 +122,11 @@ if !&sidescrolloff
 	set sidescrolloff=5
 endif
 
-" set encoding=utf-8
-
 if &listchars ==# 'eol:$'
 	set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 endif
 
-" }}}
-
-" Personal preferences {{{
+filetype plugin indent on
 
 set t_Co=256
 if has('autocmd')
@@ -184,14 +157,11 @@ set smartcase
 set showmatch
 
 set listchars=tab:▸\ ,eol:¬
-" Use your leader key + l to toggle on/off
-map <leader>l :set list!<CR> " Toggle tabs and EOL
-
 
 " folding stuff
-set foldenable
 set foldlevelstart=0	" most folds opened by default
 set foldmethod=marker   " fold based on markers level
+" set foldenable	" this makes the folds closed when file is opened
 " space open/closes folds
 nnoremap <space> za
 
@@ -202,19 +172,15 @@ set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
-" navigate windows with meta+arrows
-map <M-Right> <c-w>l
-map <M-Left> <c-w>h
-map <M-Up> <c-w>k
-map <M-Down> <c-w>j
-imap <M-Right> <ESC><c-w>l
-imap <M-Left> <ESC><c-w>h
-imap <M-Up> <ESC><c-w>k
-imap <M-Down> <ESC><c-w>j
-
-" Improve :terminal experience, same as above, except using hjkl
-" Escape from terminal with Esc:
-" :tnoremap <Esc> <C-\><C-n>
+" navigate windows with meta+arrows (including 'escape' from terminal)
+map <A-l> <c-w>l
+map <A-h> <c-w>h
+map <A-k> <c-w>k
+map <A-j> <c-w>j
+imap <A-l> <ESC><c-w>l
+imap <A-h> <ESC><c-w>h
+imap <A-k> <ESC><c-w>k
+imap <A-j> <ESC><c-w>j
 :tnoremap <A-h> <C-\><C-n><C-w>h
 :tnoremap <A-j> <C-\><C-n><C-w>j
 :tnoremap <A-k> <C-\><C-n><C-w>k
@@ -224,8 +190,7 @@ imap <M-Down> <ESC><c-w>j
 :nnoremap <A-k> <C-w>k
 :nnoremap <A-l> <C-w>l
 
-
-" buffer movement
+" buffer movement, this doesn't work in Tmux
 noremap <C-left> :bprev!<CR>
 noremap <C-right> :bnext!<CR>
 
@@ -234,13 +199,11 @@ autocmd BufReadPost *
 	\ if line("'\"") > 0 && line("'\"") <= line("$") |
 	\   exe "normal! g`\"" |
 	\ endif
-" Remember info about open buffers on close
-set viminfo^=%
 
 " Specify the behavior when switching between buffers
 try
 	set switchbuf=useopen,usetab,newtab
-	"set stal=2
+	"set stal=2	" ???
 catch
 endtry
 
@@ -257,25 +220,6 @@ set splitright
 
 " colo molokai
 set termguicolors
-" default value is "normal", Setting this option to "high" or "low" does use the 
-" same Solarized palette but simply shifts some values up or down in order to 
-" expand or compress the tonal range displayed.
-" let g:neosolarized_contrast = "high"
-" Special characters such as trailing whitespace, tabs, newlines, when displayed 
-" using ":set list" can be set to one of three levels depending on your needs. 
-" Default value is "normal". Provide "high" and "low" options.
-" let g:neosolarized_visibility = "normal"
-
-" If you wish to enable/disable Solarized from displaying bold, underlined or italicized 
-" typefaces, simply assign 1 or 0 to the appropriate variable.
-" let g:neosolarized_bold = 1
-" let g:neosolarized_underline = 1
-" let g:neosolarized_italic = 0
-" let g:solarized_termcolors=256
-" let g:solarized_termtrans=1
-" colo Tomorrow-Night-Bright
-" set background=dark
-" colo calmar256-dark
 
 " buftabline configuration
 let g:buftabline_numbers = 2 	" show buffer position next to each buffer label
@@ -308,19 +252,12 @@ if (empty($TMUX))
   endif
 endif
 
-" set background=dark
-"highlight Normal guibg=black guifg=white
-" colorscheme NeoSolarized
-"colorscheme lucius
-"colorscheme onedark
 colorscheme flatcolor
 highlight Normal guibg=black
-" highlight LineNr guibg=black
-" highlight SignColumn guibg=black
 
 " }}}
 
-" Plugin configurations {{{
+" ---- Plugin configurations --- {{{
 
 runtime! macros/matchit.vim
 
@@ -333,13 +270,13 @@ let g:ale_sign_column_always = 1
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
+  " let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
 " dont jump to quickfix window immediately
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 
 " Auto-open NerdTree on all vims
-" autocmd vimenter * NERDTree
 let g:NERDTreeShowHidden=1
 let g:NERDTreeIndicatorMapCustom = {
 			\ "Modified"  : "✹",
@@ -357,27 +294,11 @@ let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.egg-info$', '\~$', '\.git$', '\.egg
 " toggle gundo
 nnoremap <leader>u :GundoToggle<CR>
 
-" toggle ag
-if executable('ag')
-	"let g:ackprg = 'ag --vimgrep'
-	let g:ackprg = 'ag --nogroup --nocolor --column'
-endif
-" nnoremap <leader>a :Ack!<enter>
-
-" Visual mode pressing * or # searches for the current selection
-" vnoremap <silent> * :call VisualSelection('f')<CR>
-" vnoremap <silent> # :call VisualSelection('b')<CR>
-
 " Close the current buffer
 :nnoremap <Leader>fq :Bdelete<CR>
-" nnoremap <Leader>fc <Esc>:call CleanClose(1)<CR>
-" nnoremap <Leader>fq <Esc>:call CleanClose(0)<CR>
-" map <leader>bd :Bclose<cr>
 
 "add a shortcut to insert pdb by doing \pdb
-"now is \b
-" map <Leader>pdb oimport pdb; pdb.set_trace()<Esc><CR>
-map <leader>pdb oimport pdb; pdb.set_trace()<enter><esc>
+map <leader>pdb oimport pdb; pdb.set_trace()<Esc>=
 
 " add a :DiffOrig command to see differences to last saved version
 command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
@@ -390,73 +311,31 @@ map <F2> <Esc>:1,$!xmllint --format -<CR>
 
 " }}}
 
-" File type based settings {{{
+" ---- File type based settings ---- {{{
 "
 
 augroup configgroup
 	autocmd!
-" 	autocmd VimEnter * highlight clear SignColumn
-"
-	autocmd BufWritePre *.php,*.py,*.js,*.txt,*.hs,*.java,*.md :call <SID>StripTrailingWhitespaces()
-"
-" 	autocmd FileType xml setlocal foldmethod=syntax
-" 	autocmd FileType xml setlocal shiftwidth=4 expandtab ts=4 smarttab
-"
+	autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
  	autocmd BufNewFile,BufRead *.pt setlocal filetype=html
 	autocmd BufNewFile,BufRead *.vue setlocal filetype=html
-
 	autocmd BufNewFile,BufRead *.zcml setlocal filetype=xml
-"
-" 	autocmd FileType java setlocal noexpandtab
-" 	autocmd FileType java setlocal list
-" 	autocmd FileType java setlocal listchars=tab:+\ ,eol:-
-" 	autocmd FileType java setlocal formatprg=par\ -w80\ -T4
-"
-" 	autocmd FileType php setlocal expandtab
-" 	autocmd FileType php setlocal list
-" 	autocmd FileType php setlocal listchars=tab:+\ ,eol:-
-" 	autocmd FileType php setlocal formatprg=par\ -w80\ -T4
-"
+
  	autocmd Filetype html setlocal ts=2 sw=2 expandtab
-"
-" 	autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
-" 	autocmd FileType ruby setlocal tabstop=2
-" 	autocmd FileType ruby setlocal shiftwidth=2
-" 	autocmd FileType ruby setlocal softtabstop=2
-" 	autocmd FileType ruby setlocal commentstring=#\ %s
-"
+
   	autocmd FileType python setlocal commentstring=#\ %s
-  	autocmd Filetype python setlocal ts=4 sw=4 expandtab smarttab
+  	autocmd Filetype python setlocal ts=4 sw=4 expandtab
   	autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
   	autocmd FileType python match Excess /\%120v.*/
   	autocmd FileType python setlocal nowrap
   	autocmd FileType python setlocal foldlevel=99
   	autocmd VimEnter *.py nested TagbarOpen
-	autocmd FileType python BracelessEnable +indent +fold +highlight
 
-  	" autocmd FileType python RainbowParenthesesToggle
-
-	" autocmd FileType haml,yaml,coffee BracelessEnable +indent +fold +highlight
-
-" 	autocmd FileType python setlocal foldmethod=indent
-" 	autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-" 	autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-" 	autocmd FileType python setlocal foldlevelstart=1
-"
-" 	autocmd BufNewFile,BufRead *.css.dtml setlocal filetype=css
-"
-" 	autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 noexpandtab
-"
-" 	autocmd BufEnter *.cls setlocal filetype=java
-" 	autocmd BufEnter *.zsh-theme setlocal filetype=zsh
-" 	autocmd BufEnter Makefile setlocal noexpandtab
-" 	autocmd BufEnter *.sh setlocal tabstop=2
-" 	autocmd BufEnter *.sh setlocal shiftwidth=2
-" 	autocmd BufEnter *.sh setlocal softtabstop=2
 augroup END
 " }}}
 
-" Custom functions {{{
+" ---- Custom functions ---- {{{
 
 " strips trailing whitespace at the end of files. this
 " is called on buffer write in the autogroup above.
@@ -470,31 +349,10 @@ function! <SID>StripTrailingWhitespaces()
 	call cursor(l, c)
 endfunction
 
-function! VisualSelection(direction) range
-	let l:saved_reg = @"
-	execute "normal! vgvy"
-
-	let l:pattern = escape(@", '\\/.*$^~[]')
-	let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-	if a:direction == 'b'
-		execute "normal ?" . l:pattern . "^M"
-	elseif a:direction == 'gv'
-		call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
-	elseif a:direction == 'replace'
-		call CmdLine("%s" . '/'. l:pattern . '/')
-	elseif a:direction == 'f'
-		execute "normal /" . l:pattern . "^M"
-	endif
-
-	let @/ = l:pattern
-	let @" = l:saved_reg
-endfunction
-
 " }}}
  
-" {{{ Airline configuration
-"
+" ---- Airline configuration ---- {{{ 
+" TODO: explain, test and understand this stuff
 let g:lightline = {
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
@@ -560,7 +418,7 @@ endfunction
 
 " }}}
 
-" {{{ Stuff that's commented 
+" ---- Stuff that's commented ---- {{{  
 
  
 " To test for fullcolor support in terminal:
@@ -700,7 +558,137 @@ endfunction
 "       \ 'separator': { 'left': '', 'right': '' },
 "       \ 'subseparator': { 'left': '', 'right': '' }
 "       \ }
+" Better (python including) text objects, folding and m ore
+" Plug 'tweekmonster/braceless.vim'
+", { 'on':  'NERDTreeToggle' }
+" Plug 'tpope/vim-sensible'
+" Plug 'klen/python-mode'
+" Plug 'tmhedberg/SimpylFold'
+" Plug 'chriskempson/tomorrow-theme', {'rtp':'vim'}
+" Plug 'vim-scripts/calmar256-lightdark.vim'
+" Buffers integration with tabs and windows
+" Plug 'bling/vim-bufferline'
+" Plug 'zefei/vim-wintabs'
+" Group dependencies, vim-snippets depends on ultisnips
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Rainbow parantheses
+" Plug 'kien/rainbow_parentheses.vim'
+" Plug 'luochen1990/rainbow'
+" Plug 'iCyMind/NeoSolarized'
+" Plug 'rakr/vim-two-firewatch'
+" Plug 'romainl/Apprentice'
+" Plug 'jonathanfilip/vim-lucius'
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'joshdick/onedark.vim'
+" Plug 'jacoborus/tender.vim'
 
+" http://www.calmar.ws/dotfiles/dotfiledir/calmar256-dark.vim
+" set t_Co=256
+"
+" default value is "normal", Setting this option to "high" or "low" does use the 
+" same Solarized palette but simply shifts some values up or down in order to 
+" expand or compress the tonal range displayed.
+" let g:neosolarized_contrast = "high"
+" Special characters such as trailing whitespace, tabs, newlines, when displayed 
+" using ":set list" can be set to one of three levels depending on your needs. 
+" Default value is "normal". Provide "high" and "low" options.
+" let g:neosolarized_visibility = "normal"
 
+" If you wish to enable/disable Solarized from displaying bold, underlined or italicized 
+" typefaces, simply assign 1 or 0 to the appropriate variable.
+" let g:neosolarized_bold = 1
+" let g:neosolarized_underline = 1
+" let g:neosolarized_italic = 0
+" let g:solarized_termcolors=256
+" let g:solarized_termtrans=1
+" colo Tomorrow-Night-Bright
+" set background=dark
+" colo calmar256-dark
+"
+" set encoding=utf-8
+" Remember info about open buffers on close
+" set viminfo^=%
+" nnoremap <Leader>fc <Esc>:call CleanClose(1)<CR>
+" nnoremap <Leader>fq <Esc>:call CleanClose(0)<CR>
+" map <leader>bd :Bclose<cr>
+" Use your leader key + l to toggle on/off
+" map <leader>l :set list!<CR> " Toggle tabs and EOL
+" Escape from :terminal with Esc:
+" :tnoremap <Esc> <C-\><C-n>
+
+" Visual mode pressing * or # searches for the current selection
+" vnoremap <silent> * :call VisualSelection('f')<CR>
+" vnoremap <silent> # :call VisualSelection('b')<CR>
+
+" autocmd FileType python BracelessEnable +indent +fold +highlight
+" autocmd FileType python RainbowParenthesesToggle
+
+" set background=dark
+"highlight Normal guibg=black guifg=white
+" colorscheme NeoSolarized
+"colorscheme lucius
+"colorscheme onedark
+" highlight LineNr guibg=black
+" highlight SignColumn guibg=black
+" autocmd vimenter * NERDTree
+
+" function! VisualSelection(direction) range
+" 	let l:saved_reg = @"
+" 	execute "normal! vgvy"
+"
+" 	let l:pattern = escape(@", '\\/.*$^~[]')
+" 	let l:pattern = substitute(l:pattern, "\n$", "", "")
+"
+" 	if a:direction == 'b'
+" 		execute "normal ?" . l:pattern . "^M"
+" 	elseif a:direction == 'gv'
+" 		call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+" 	elseif a:direction == 'replace'
+" 		call CmdLine("%s" . '/'. l:pattern . '/')
+" 	elseif a:direction == 'f'
+" 		execute "normal /" . l:pattern . "^M"
+" 	endif
+"
+" 	let @/ = l:pattern
+" 	let @" = l:saved_reg
+" endfunction
+"
+" 	autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
+" 	autocmd FileType ruby setlocal tabstop=2
+" 	autocmd FileType ruby setlocal shiftwidth=2
+" 	autocmd FileType ruby setlocal softtabstop=2
+" 	autocmd FileType ruby setlocal commentstring=#\ %s
+" 	autocmd VimEnter * highlight clear SignColumn
+" 	autocmd FileType xml setlocal foldmethod=syntax
+" 	autocmd FileType xml setlocal shiftwidth=4 expandtab ts=4 smarttab
+" 	autocmd FileType java setlocal noexpandtab
+" 	autocmd FileType java setlocal list
+" 	autocmd FileType java setlocal listchars=tab:+\ ,eol:-
+" 	autocmd FileType java setlocal formatprg=par\ -w80\ -T4
+"
+" 	autocmd FileType php setlocal expandtab
+" 	autocmd FileType php setlocal list
+" 	autocmd FileType php setlocal listchars=tab:+\ ,eol:-
+" 	autocmd FileType php setlocal formatprg=par\ -w80\ -T4
+"
+"
+	" autocmd FileType haml,yaml,coffee BracelessEnable +indent +fold +highlight
+
+" 	autocmd FileType python setlocal foldmethod=indent
+" 	autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+" 	autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+" 	autocmd FileType python setlocal foldlevelstart=1
+"
+" 	autocmd BufNewFile,BufRead *.css.dtml setlocal filetype=css
+"
+" 	autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 noexpandtab
+"
+" 	autocmd BufEnter *.cls setlocal filetype=java
+" 	autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+" 	autocmd BufEnter Makefile setlocal noexpandtab
+" 	autocmd BufEnter *.sh setlocal tabstop=2
+" 	autocmd BufEnter *.sh setlocal shiftwidth=2
+" 	autocmd BufEnter *.sh setlocal softtabstop=2
+" autocmd BufWritePre *.php,*.py,*.js,*.txt,*.hs,*.java,*.md :call <SID>StripTrailingWhitespaces()
 
 " }}}
