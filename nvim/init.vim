@@ -1,8 +1,10 @@
+" {{{ ---- Bootstrap ----
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
+" }}}
 
 " {{{ ---- Plugin configuration ----
 
@@ -30,7 +32,9 @@ Plug 'sheerun/vim-polyglot'
 
 " Show git status stull in guter column (next to numbers)
 Plug 'airblade/vim-gitgutter'
-" Plug 'kshenoy/vim-signature'
+
+" Show marks in gutter, delete mark with dm<x>
+Plug 'kshenoy/vim-signature'
 
 " Git integration, do :Gdiff, :Gblame, :Gremove and more
 Plug 'tpope/vim-fugitive'
