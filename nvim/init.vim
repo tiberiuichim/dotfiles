@@ -308,7 +308,7 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 
 " vim-devicons confiration
 " whether or not to show the nerdtree brackets around flags
-let g:webdevicons_conceal_nerdtree_brackets = 0
+let g:webdevicons_conceal_nerdtree_brackets = 1
 " the amount of space to use after the glyph character (default ' ')
 let g:WebDevIconsNerdTreeAfterGlyphPadding = ''
 " Force extra padding in NERDTree so that the filetype icons line up vertically
