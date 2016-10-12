@@ -3,7 +3,7 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
-"
+
 " {{{ ---- Plugin configuration ----
 
 " To reload plugins, after changing here:
@@ -13,10 +13,10 @@ endif
 " 	remove from below
 " 	call:
 " 	:PlugClean!
+" NOTE: Make sure you use single quotes when defining Plug
+
 
 call plug#begin('~/.vim/plugged')
-
-" NOTE: Make sure you use single quotes
 
 " The inimitable NerdTree
 Plug 'scrooloose/nerdtree'
@@ -32,22 +32,20 @@ Plug 'sheerun/vim-polyglot'
 Plug 'airblade/vim-gitgutter'
 " Plug 'kshenoy/vim-signature'
 
+" Git integration, do :Gdiff, :Gblame, :Gremove and more
+Plug 'tpope/vim-fugitive'
+
 " ALE (Asynchronous Lint Engine) is a plugin for providing linting in NeoVim
 " and Vim 8 while you edit your text files.
 " See https://github.com/maralla/validator.vim for a better one??
 " or https://github.com/neomake/neomake
 Plug 'w0rp/ale'
 
-" Rainbow parantheses
-" Plug 'kien/rainbow_parentheses.vim'
-" Plug 'luochen1990/rainbow'
-
 " Python 'tags' in a tagbar
 Plug 'majutsushi/tagbar'
 
 " Better (python including) text objects, folding and m ore
 " Plug 'tweekmonster/braceless.vim'
-
 
 " Vim Substitute as operator plugin
 Plug 'kana/vim-operator-user'	" dependency of vim-operator-substitute
@@ -60,47 +58,42 @@ Plug 'tomtom/tcomment_vim'
 Plug 'editorconfig/editorconfig-vim'
 
 " Colorthemes
-Plug 'iCyMind/NeoSolarized'
-Plug 'rakr/vim-two-firewatch'
-Plug 'romainl/Apprentice'
-Plug 'jonathanfilip/vim-lucius'
-Plug 'nanotech/jellybeans.vim'
-Plug 'joshdick/onedark.vim'
 Plug 'MaxSt/FlatColor'
-Plug 'jacoborus/tender.vim'
 
 " Nice colors in status bar
 Plug 'itchyny/lightline.vim'
 
-" Plug 'chriskempson/tomorrow-theme', {'rtp':'vim'}
-" Plug 'vim-scripts/calmar256-lightdark.vim'
-
-" Plug 'klen/python-mode'
-" Plug 'tmhedberg/SimpylFold'
-"
-
-" Plug 'mileszs/ack.vim'
-", { 'on':  'NERDTreeToggle' }
-" Plug 'tpope/vim-sensible'
+" Use :Ack to search with ag
+Plug 'mileszs/ack.vim'
 
 Plug 'junegunn/vim-easy-align'
-
-" Plug 'junegunn/vim-github-dashboard'
-"
 
 " Tabline / bufferline plugins. Not all of them work with airline
 " See vim-buftabline github page for alternatives
 Plug 'ap/vim-buftabline'
 
-" Plug 'bling/vim-bufferline'
-"
+", { 'on':  'NERDTreeToggle' }
+" Plug 'tpope/vim-sensible'
+" Plug 'klen/python-mode'
+" Plug 'tmhedberg/SimpylFold'
+" Plug 'chriskempson/tomorrow-theme', {'rtp':'vim'}
+" Plug 'vim-scripts/calmar256-lightdark.vim'
 " Buffers integration with tabs and windows
+" Plug 'bling/vim-bufferline'
 " Plug 'zefei/vim-wintabs'
-
 " Group dependencies, vim-snippets depends on ultisnips
 " Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+" Rainbow parantheses
+" Plug 'kien/rainbow_parentheses.vim'
+" Plug 'luochen1990/rainbow'
+" Plug 'iCyMind/NeoSolarized'
+" Plug 'rakr/vim-two-firewatch'
+" Plug 'romainl/Apprentice'
+" Plug 'jonathanfilip/vim-lucius'
+" Plug 'nanotech/jellybeans.vim'
+" Plug 'joshdick/onedark.vim'
+" Plug 'jacoborus/tender.vim'
 
-" Add plugins to &runtimepath
 call plug#end()
 
 " http://www.calmar.ws/dotfiles/dotfiledir/calmar256-dark.vim
@@ -110,50 +103,15 @@ filetype plugin indent on
 
 " }}}
 
-" asynchronous lint engine (ale) settings
+" Settings lifted from sensible.vim {{{
 
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'python': ['flake8'],
-\}
-let g:ale_sign_column_always = 1
-" let g:ale_sign_error = '>>'
-" let g:ale_sign_warning = '--'
-
-" lucien rainbow parans stuff
-" let g:rainbow_active = 1
-" let g:rainbow_conf = {
-"     \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-"     \   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-"     \   'operators': '_,_',
-"     \   'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-"     \   'separately': {
-"     \       '*': {},
-"     \       'tex': {
-"     \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-"     \       },
-"     \       'lisp': {
-"     \           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-"     \       },
-"     \       'vim': {
-"     \           'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-"     \       },
-"     \       'html': {
-"     \           'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-"     \       },
-"     \       'css': 0,
-"     \   }
-"     \}
-
-
-"Settings lifted from sensible.vim {{{
 set autoindent
 set backspace=indent,eol,start
 set complete-=i
 set smarttab
 
 set nrformats-=octal
-"
+
 " undo settings
 set undolevels=10000
 set undofile
@@ -165,42 +123,40 @@ set ttimeoutlen=100
 
 set hlsearch
 set noincsearch
+
 " Use <C-L> to clear the highlighting of :set hlsearch.
 if maparg('<C-L>', 'n') ==# ''
 	nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
 
+set display+=lastline
 set laststatus=2
 set ruler
 set wildmenu
 
 if !&scrolloff
-	set scrolloff=1
+	set scrolloff=3		" how many lines to bottom cause scrolling
 endif
 if !&sidescrolloff
 	set sidescrolloff=5
 endif
-set display+=lastline
 
 " set encoding=utf-8
 
 if &listchars ==# 'eol:$'
 	set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 endif
+
 " }}}
 
 " Personal preferences {{{
+
 set t_Co=256
 if has('autocmd')
 	filetype plugin indent on
 endif
 
 syntax enable
-
-set guifont=Inconsolata\ 11
-"set guifont=Liberation\ Mono\ 10
-set guioptions-=m
-set guioptions-=T
 
 set number
 set textwidth=79
@@ -364,13 +320,12 @@ highlight Normal guibg=black
 
 runtime! macros/matchit.vim
 
-" let g:lightline = {
-"       \ 'component': {
-"       \   'readonly': '%{&readonly?"":""}',
-"       \ },
-"       \ 'separator': { 'left': '', 'right': '' },
-"       \ 'subseparator': { 'left': '', 'right': '' }
-"       \ }
+" asynchronous lint engine (ale) settings
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'python': ['flake8'],
+\}
+let g:ale_sign_column_always = 1
 
 
 " Auto-open NerdTree on all vims
@@ -491,29 +446,6 @@ augroup configgroup
 augroup END
 " }}}
 
-
-" kien implementation of rainbow parans stuff
-" let g:rbpt_colorpairs = [
-"     \ ['brown',       'RoyalBlue3'],
-"     \ ['Darkblue',    'SeaGreen3'],
-"     \ ['darkgray',    'DarkOrchid3'],
-"     \ ['darkgreen',   'firebrick3'],
-"     \ ['darkcyan',    'RoyalBlue3'],
-"     \ ['darkred',     'SeaGreen3'],
-"     \ ['darkmagenta', 'DarkOrchid3'],
-"     \ ['brown',       'firebrick3'],
-"     \ ['gray',        'RoyalBlue3'],
-"     \ ['black',       'SeaGreen3'],
-"     \ ['darkmagenta', 'DarkOrchid3'],
-"     \ ['Darkblue',    'firebrick3'],
-"     \ ['darkgreen',   'RoyalBlue3'],
-"     \ ['darkcyan',    'SeaGreen3'],
-"     \ ['darkred',     'DarkOrchid3'],
-"     \ ['red',         'firebrick3'],
-"     \ ]
-" let g:rbpt_max = 16
-"
-
 " Custom functions {{{
 
 " strips trailing whitespace at the end of files. this
@@ -615,10 +547,10 @@ endfunction
 function! LightLineMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+
 " }}}
 
-
-
+" {{{ Stuff that's commented 
 
  
 " To test for fullcolor support in terminal:
@@ -650,7 +582,6 @@ endfunction
 "
 " "
 
-" {{{ Stuff that's commented 
 "
 " let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 " " insert mode - line 
@@ -746,5 +677,20 @@ endfunction
 
 " Show leader guide for all key mappings
 " Plug 'hecal3/vim-leader-guide'
+
+" set guifont=Inconsolata\ 11
+" "set guifont=Liberation\ Mono\ 10
+" set guioptions-=m
+" set guioptions-=T
+
+" let g:lightline = {
+"       \ 'component': {
+"       \   'readonly': '%{&readonly?"":""}',
+"       \ },
+"       \ 'separator': { 'left': '', 'right': '' },
+"       \ 'subseparator': { 'left': '', 'right': '' }
+"       \ }
+
+
 
 " }}}
