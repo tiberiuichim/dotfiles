@@ -12,9 +12,9 @@ endif
 " :so %
 " :PlugInstall
 " To uninstall a plugin:
-" 	remove from below
-" 	call:
-" 	:PlugClean!
+"   remove from below
+"   call:
+"   :PlugClean!
 " NOTE: Make sure you use single quotes when defining Plug
 
 call plug#begin('~/.vim/plugged')
@@ -47,7 +47,7 @@ Plug 'w0rp/ale'
 Plug 'majutsushi/tagbar'
 
 " Vim Substitute as operator plugin
-Plug 'kana/vim-operator-user'	" dependency of vim-operator-substitute
+Plug 'kana/vim-operator-user'   " dependency of vim-operator-substitute
 Plug 'milsen/vim-operator-substitute'
 
 " Toggle comments with tcc
@@ -75,6 +75,7 @@ Plug 'ap/vim-css-color'
 
 " Nice colors in status bar
 Plug 'itchyny/lightline.vim'
+Plug 'mgee/lightline-bufferline'
 
 " Use :Ack to search with ag
 Plug 'mileszs/ack.vim'
@@ -84,7 +85,7 @@ Plug 'junegunn/vim-easy-align'
 
 " Tabline / bufferline plugins. Not all of them work with airline
 " See vim-buftabline github page for alternatives
-Plug 'ap/vim-buftabline'
+" Plug 'ap/vim-buftabline'
 
 " Adds :Gundo, a visual tree of the undo
 Plug 'sjl/gundo.vim'
@@ -101,7 +102,7 @@ set autoindent
 set backspace=indent,eol,start
 set complete-=i
 set smarttab
-set tabstop=4	" not liking big tabs
+set tabstop=4   " not liking big tabs
 set shiftwidth=4
 
 set nrformats-=octal
@@ -115,12 +116,12 @@ highlight SpellBad term=underline gui=undercurl guisp=Orange
 set ttimeout
 set ttimeoutlen=100
 
-set hlsearch		" highlight search matches
-set noincsearch		" jumps to first match as you type
+set hlsearch        " highlight search matches
+set noincsearch     " jumps to first match as you type
 
 " Use <C-L> to clear the highlighting of :set hlsearch.
 if maparg('<C-L>', 'n') ==# ''
-	nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+    nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
 
 set display+=lastline
@@ -129,21 +130,21 @@ set ruler
 set wildmenu
 
 if !&scrolloff
-	set scrolloff=3		" how many lines to bottom cause scrolling
+    set scrolloff=3     " how many lines to bottom cause scrolling
 endif
 if !&sidescrolloff
-	set sidescrolloff=5
+    set sidescrolloff=5
 endif
 
 if &listchars ==# 'eol:$'
-	set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+    set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 endif
 
 filetype plugin indent on
 
 set t_Co=256
 if has('autocmd')
-	filetype plugin indent on
+    filetype plugin indent on
 endif
 
 syntax enable
@@ -161,20 +162,20 @@ set formatoptions=tcqrn1
 set nospell
 " set clipboard+=unnamed      "also include system clipboard in the default yank registers
 
-set noshowmode		" already provided by lightline
+set noshowmode      " already provided by lightline
 set showcmd
 
 " when searching, ignore case if all letters lowercase
 " set ignorecase
-" set smartcase		" override ignorecase if term has caps
+" set smartcase     " override ignorecase if term has caps
 set showmatch
 
 set listchars=tab:▸\ ,eol:¬
 
 " folding stuff
-set foldlevelstart=0	" most folds opened by default
+set foldlevelstart=0    " most folds opened by default
 set foldmethod=marker   " fold based on markers level
-" set foldenable	" this makes the folds closed when file is opened
+" set foldenable    " this makes the folds closed when file is opened
 " space open/closes folds
 nnoremap <space> za
 
@@ -209,14 +210,14 @@ noremap <C-right> :bnext!<CR>
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
-	\ if line("'\"") > 0 && line("'\"") <= line("$") |
-	\   exe "normal! g`\"" |
-	\ endif
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
 
 " Specify the behavior when switching between buffers
 try
-	set switchbuf=useopen,usetab,newtab
-	"set stal=2	" ???
+    set switchbuf=useopen,usetab,newtab
+    "set stal=2 " ???
 catch
 endtry
 
@@ -259,8 +260,8 @@ highlight Todo guibg=red
 " not really, nvim has no gui, just to remind myself what font I use
 set guifont=LiterationMonoPowerline\ Nerd\ Font
 
-set nuw=6				" increase size of gutter column
-set foldcolumn=1		" increase size of fold column
+set nuw=6               " increase size of gutter column
+set foldcolumn=1        " increase size of fold column
 
 " }}}
 
@@ -269,7 +270,7 @@ set foldcolumn=1		" increase size of fold column
 runtime! macros/matchit.vim
 
 " buftabline configuration
-let g:buftabline_numbers = 2 	" show buffer position next to each buffer label
+let g:buftabline_numbers = 2    " show buffer position next to each buffer label
 " use \1 to go to tab 1
 nmap <leader>1 <Plug>BufTabLine.Go(1)
 nmap <leader>2 <Plug>BufTabLine.Go(2)
@@ -301,16 +302,16 @@ nnoremap <Leader>a :Ack!<Space>
 " Auto-open NerdTree on all vims
 let g:NERDTreeShowHidden=1
 let g:NERDTreeIndicatorMapCustom = {
-			\ "Modified"  : "✹",
-			\ "Staged"    : "✚",
-			\ "Untracked" : "✭",
-			\ "Renamed"   : "➜",
-			\ "Unmerged"  : "",
-			\ "Deleted"   : "✖",
-			\ "Dirty"     : "✗",
-			\ "Clean"     : "✔︎",
-			\ "Unknown"   : "?"
-			\ }
+            \ "Modified"  : "✹",
+            \ "Staged"    : "✚",
+            \ "Untracked" : "✭",
+            \ "Renamed"   : "➜",
+            \ "Unmerged"  : "",
+            \ "Deleted"   : "✖",
+            \ "Dirty"     : "✗",
+            \ "Clean"     : "✔︎",
+            \ "Unknown"   : "?"
+            \ }
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.egg-info$', '\~$', '\.git$', '\.eggs']
 
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -340,22 +341,22 @@ map <F2> <Esc>:1,$!xmllint --format -<CR>
 "
 
 augroup configgroup
-	autocmd!
-	autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+    autocmd!
+    autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
- 	autocmd BufNewFile,BufRead *.pt setlocal filetype=html
-	autocmd BufNewFile,BufRead *.vue setlocal filetype=html
-	autocmd BufNewFile,BufRead *.zcml setlocal filetype=xml
+    autocmd BufNewFile,BufRead *.pt setlocal filetype=html
+    autocmd BufNewFile,BufRead *.vue setlocal filetype=html
+    autocmd BufNewFile,BufRead *.zcml setlocal filetype=xml
 
- 	autocmd Filetype html setlocal ts=2 sw=2 expandtab
+    autocmd Filetype html setlocal ts=2 sw=2 expandtab
 
-  	autocmd FileType python setlocal commentstring=#\ %s
-  	autocmd Filetype python setlocal ts=4 sw=4 expandtab
-  	autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
-  	autocmd FileType python match Excess /\%120v.*/
-  	autocmd FileType python setlocal nowrap
-  	autocmd FileType python setlocal foldlevel=99
-  	autocmd VimEnter *.py nested TagbarOpen
+    autocmd FileType python setlocal commentstring=#\ %s
+    autocmd Filetype python setlocal ts=4 sw=4 expandtab
+    autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
+    autocmd FileType python match Excess /\%120v.*/
+    autocmd FileType python setlocal nowrap
+    autocmd FileType python setlocal foldlevel=99
+    autocmd VimEnter *.py nested TagbarOpen
 
 augroup END
 " }}}
@@ -365,13 +366,13 @@ augroup END
 " strips trailing whitespace at the end of files. this
 " is called on buffer write in the autogroup above.
 function! <SID>StripTrailingWhitespaces()
-	" save last search & cursor position
-	let _s=@/
-	let l = line(".")
-	let c = col(".")
-	%s/\s\+$//e
-	let @/=_s
-	call cursor(l, c)
+    " save last search & cursor position
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    let @/=_s
+    call cursor(l, c)
 endfunction
 
 " }}}
@@ -400,22 +401,28 @@ let g:lightline = {
       \ 'component': {
       \   'readonly': '%{&readonly?"":""}',
       \ },
-	  \ 'component_type': {
-      \ 	'alestatus': 'error',
-	  \ },
+      \ 'component_type': {
+      \     'alestatus': 'error',
+      \ },
       \ 'separator': { 'left': '', 'right': '' },
       \ 'subseparator': { 'left': '', 'right': '' },
       \ }
+
+let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
+
+set showtabline=2     " always show the tabline
 
 " TODO: make the alestatus work properly, show as error
 "
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 function! LightLineAleStatus()
-	return ('' != ALEGetStatusLine() ? '-ALE-' . ALEGetStatusLine() : '-|-')
+    return ('' != ALEGetStatusLine() ? '-ALE-' . ALEGetStatusLine() : '-|-')
 endfunction
 
 function! LightLineModified()
-	return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 
 function! LightLineReadonly()
@@ -426,10 +433,10 @@ function! LightLineFilename()
   " let fname = expand('%:t')
   let fname = expand('%:t')
   return fname == '__Tagbar__' ? g:lightline.fname :
-        \ fname =~ '__Gundo\|NERD_tree' ? '' :
-        \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != fname ? fname : '[No Name]') .
-        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+              \ fname =~ '__Gundo\|NERD_tree' ? '' :
+              \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+              \ ('' != fname ? fname : '[No Name]') .
+              \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
 " function! LightLineFugitive()
@@ -515,42 +522,42 @@ endfunction
 " Don't close window, when deleting a buffer
 " command! Bclose call <SID>BufcloseCloseIt()
 " function! <SID>BufcloseCloseIt()
-" 	let l:currentBufNum = bufnr("%")
-" 	let l:alternateBufNum = bufnr("#")
+"   let l:currentBufNum = bufnr("%")
+"   let l:alternateBufNum = bufnr("#")
 "
-" 	if buflisted(l:alternateBufNum)
-" 		buffer #
-" 	else
-" 		bnext
-" 	endif
+"   if buflisted(l:alternateBufNum)
+"       buffer #
+"   else
+"       bnext
+"   endif
 "
-" 	if bufnr("%") == l:currentBufNum
-" 		new
-" 	endif
+"   if bufnr("%") == l:currentBufNum
+"       new
+"   endif
 "
-" 	if buflisted(l:currentBufNum)
-" 		execute("bdelete! ".l:currentBufNum)
-" 	endif
+"   if buflisted(l:currentBufNum)
+"       execute("bdelete! ".l:currentBufNum)
+"   endif
 " endfunction
 "
 "
 " function! CleanClose(tosave)
-" 	if (a:tosave == 1)
-" 		w!
-" 	endif
-" 	let todelbufNr = bufnr("%")
-" 	let newbufNr = bufnr("#")
-" 	if ((newbufNr != -1) && (newbufNr != todelbufNr) && buflisted(newbufNr))
-" 		exe "b".newbufNr
-" 	else
-" 		bnext
-" 	endif
+"   if (a:tosave == 1)
+"       w!
+"   endif
+"   let todelbufNr = bufnr("%")
+"   let newbufNr = bufnr("#")
+"   if ((newbufNr != -1) && (newbufNr != todelbufNr) && buflisted(newbufNr))
+"       exe "b".newbufNr
+"   else
+"       bnext
+"   endif
 "
-" 	if (bufnr("%") == todelbufNr)
-" 		new
-" 	endif
-" 	exe "bd".todelbufNr
-" 	" call Buftabs_show()
+"   if (bufnr("%") == todelbufNr)
+"       new
+"   endif
+"   exe "bd".todelbufNr
+"   " call Buftabs_show()
 " endfunction
 "
 " Python-mode
@@ -678,67 +685,67 @@ endfunction
 " autocmd vimenter * NERDTree
 
 " function! VisualSelection(direction) range
-" 	let l:saved_reg = @"
-" 	execute "normal! vgvy"
+"   let l:saved_reg = @"
+"   execute "normal! vgvy"
 "
-" 	let l:pattern = escape(@", '\\/.*$^~[]')
-" 	let l:pattern = substitute(l:pattern, "\n$", "", "")
+"   let l:pattern = escape(@", '\\/.*$^~[]')
+"   let l:pattern = substitute(l:pattern, "\n$", "", "")
 "
-" 	if a:direction == 'b'
-" 		execute "normal ?" . l:pattern . "^M"
-" 	elseif a:direction == 'gv'
-" 		call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
-" 	elseif a:direction == 'replace'
-" 		call CmdLine("%s" . '/'. l:pattern . '/')
-" 	elseif a:direction == 'f'
-" 		execute "normal /" . l:pattern . "^M"
-" 	endif
+"   if a:direction == 'b'
+"       execute "normal ?" . l:pattern . "^M"
+"   elseif a:direction == 'gv'
+"       call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+"   elseif a:direction == 'replace'
+"       call CmdLine("%s" . '/'. l:pattern . '/')
+"   elseif a:direction == 'f'
+"       execute "normal /" . l:pattern . "^M"
+"   endif
 "
-" 	let @/ = l:pattern
-" 	let @" = l:saved_reg
+"   let @/ = l:pattern
+"   let @" = l:saved_reg
 " endfunction
 "
-" 	autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
-" 	autocmd FileType ruby setlocal tabstop=2
-" 	autocmd FileType ruby setlocal shiftwidth=2
-" 	autocmd FileType ruby setlocal softtabstop=2
-" 	autocmd FileType ruby setlocal commentstring=#\ %s
-" 	autocmd VimEnter * highlight clear SignColumn
-" 	autocmd FileType xml setlocal foldmethod=syntax
-" 	autocmd FileType xml setlocal shiftwidth=4 expandtab ts=4 smarttab
-" 	autocmd FileType java setlocal noexpandtab
-" 	autocmd FileType java setlocal list
-" 	autocmd FileType java setlocal listchars=tab:+\ ,eol:-
-" 	autocmd FileType java setlocal formatprg=par\ -w75\ -T4
+"   autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
+"   autocmd FileType ruby setlocal tabstop=2
+"   autocmd FileType ruby setlocal shiftwidth=2
+"   autocmd FileType ruby setlocal softtabstop=2
+"   autocmd FileType ruby setlocal commentstring=#\ %s
+"   autocmd VimEnter * highlight clear SignColumn
+"   autocmd FileType xml setlocal foldmethod=syntax
+"   autocmd FileType xml setlocal shiftwidth=4 expandtab ts=4 smarttab
+"   autocmd FileType java setlocal noexpandtab
+"   autocmd FileType java setlocal list
+"   autocmd FileType java setlocal listchars=tab:+\ ,eol:-
+"   autocmd FileType java setlocal formatprg=par\ -w75\ -T4
 "
-" 	autocmd FileType php setlocal expandtab
-" 	autocmd FileType php setlocal list
-" 	autocmd FileType php setlocal listchars=tab:+\ ,eol:-
-" 	autocmd FileType php setlocal formatprg=par\ -w80\ -T4
+"   autocmd FileType php setlocal expandtab
+"   autocmd FileType php setlocal list
+"   autocmd FileType php setlocal listchars=tab:+\ ,eol:-
+"   autocmd FileType php setlocal formatprg=par\ -w80\ -T4
 "
-	" autocmd FileType haml,yaml,coffee BracelessEnable +indent +fold +highlight
+    " autocmd FileType haml,yaml,coffee BracelessEnable +indent +fold +highlight
 
-" 	autocmd FileType python setlocal foldmethod=indent
-" 	autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
-" 	autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
-" 	autocmd FileType python setlocal foldlevelstart=1
+"   autocmd FileType python setlocal foldmethod=indent
+"   autocmd BufWinEnter *.py setlocal foldexpr=SimpylFold(v:lnum) foldmethod=expr
+"   autocmd BufWinLeave *.py setlocal foldexpr< foldmethod<
+"   autocmd FileType python setlocal foldlevelstart=1
 "
-" 	autocmd BufNewFile,BufRead *.css.dtml setlocal filetype=css
+"   autocmd BufNewFile,BufRead *.css.dtml setlocal filetype=css
 "
-" 	autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 noexpandtab
+"   autocmd Filetype javascript setlocal ts=4 sw=4 sts=0 noexpandtab
 "
-" 	autocmd BufEnter *.cls setlocal filetype=java
-" 	autocmd BufEnter *.zsh-theme setlocal filetype=zsh
-" 	autocmd BufEnter Makefile setlocal noexpandtab
-" 	autocmd BufEnter *.sh setlocal tabstop=2
-" 	autocmd BufEnter *.sh setlocal shiftwidth=2
-" 	autocmd BufEnter *.sh setlocal softtabstop=2
+"   autocmd BufEnter *.cls setlocal filetype=java
+"   autocmd BufEnter *.zsh-theme setlocal filetype=zsh
+"   autocmd BufEnter Makefile setlocal noexpandtab
+"   autocmd BufEnter *.sh setlocal tabstop=2
+"   autocmd BufEnter *.sh setlocal shiftwidth=2
+"   autocmd BufEnter *.sh setlocal softtabstop=2
 " autocmd BufWritePre *.php,*.py,*.js,*.txt,*.hs,*.java,*.md :call <SID>StripTrailingWhitespaces()
 
 " NERDTress File highlighting
 " function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-" 	exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
-" 	exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+"   exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+"   exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 " endfunction
 "
 " call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
@@ -756,11 +763,11 @@ endfunction
 " call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 "
 " function! MyFiletype()
-" 	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . '' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+"   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . '' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 " endfunction
 "
 " function! MyFileformat()
-" 	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+"   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 " endfunction
 "
 
