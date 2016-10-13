@@ -381,6 +381,8 @@ endfunction
 " components are name:function to call
 " use the active: left/right lists to control what shows where
 
+set showtabline=2     " always show the tabline
+
 let g:lightline = {
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
@@ -412,10 +414,11 @@ let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
 
-set showtabline=2     " always show the tabline
+let g:lightline#bufferline#show_number  = 1
+let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#unnamed      = '[No Name]'
 
 " TODO: make the alestatus work properly, show as error
-"
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
 function! LightLineAleStatus()
     return ('' != ALEGetStatusLine() ? '-ALE-' . ALEGetStatusLine() : '-|-')
