@@ -31,9 +31,6 @@ Plug 'moll/vim-bbye'
 " Show git status stull in guter column (next to numbers)
 Plug 'airblade/vim-gitgutter'
 
-" Show marks in gutter
-Plug 'kshenoy/vim-signature'
-
 " Git integration, do :Gdiff, :Gblame, :Gremove and more
 Plug 'tpope/vim-fugitive'
 
@@ -780,5 +777,8 @@ endfunction
 " Adds file icons in NerdTree, airline, unite, vim-startify, etc
 " It should be loaded last!
 " Plug 'ryanoasis/vim-devicons'
+" " Show marks in gutter
+" Plug 'kshenoy/vim-signature'
+
 
 " }}}
