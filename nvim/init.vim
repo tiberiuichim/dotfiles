@@ -46,6 +46,9 @@ Plug 'w0rp/ale'
 " Python 'tags' in a tagbar
 Plug 'majutsushi/tagbar'
 
+" Python fix code with F8
+Plug 'tell-k/vim-autopep8'
+
 " Vim Substitute as operator plugin
 Plug 'kana/vim-operator-user'   " dependency of vim-operator-substitute
 Plug 'milsen/vim-operator-substitute'
