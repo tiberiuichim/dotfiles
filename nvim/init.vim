@@ -805,4 +805,33 @@ endfunction
 " " Show marks in gutter
 " Plug 'kshenoy/vim-signature'
 
+" augroup my_dirvish_events
+"   autocmd!
+"   " Map t to "open in new tab".
+"   autocmd FileType dirvish
+" 	\  nnoremap <buffer> t :call dirvish#open('tabedit', 0)<CR>
+" 	\ |xnoremap <buffer> t :call dirvish#open('tabedit', 0)<CR>
+"
+"   " Enable :Gstatus and friends.
+"   autocmd FileType dirvish call fugitive#detect(@%)
+"
+"   " Map CTRL-R to reload the Dirvish buffer.
+"   autocmd FileType dirvish nnoremap <buffer> <C-R> :<C-U>Dirvish %<CR>
+"
+"   " Map `gh` to hide dot-prefixed files.
+"   " To "toggle" this, just press `R` to reload.
+"   autocmd FileType dirvish nnoremap <buffer>
+" 	\ gh :keeppatterns g@\v/\.[^\/]+/?$@d<cr>
+"
+"   " hide .pyc files by deleting them
+"   autocmd FileType dirvish :g/.pyc/d
+"   autocmd FileType dirvish :g/.egg-info/d
+"   autocmd FileType dirvish :g/\~$/d
+"   " sort folders at top
+"   autocmd FileType dirvish :sort r /[^\/]$/
+" augroup END
+"
+" dirvish, alternate file explorer in split
+" Plug 'justinmk/vim-dirvish'
+
 " }}}
