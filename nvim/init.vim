@@ -89,6 +89,9 @@ Plug 'mileszs/ack.vim'
 " The :EasyAlign command
 Plug 'junegunn/vim-easy-align'
 
+" Show indent guides with <leader>ig
+Plug 'nathanaelkane/vim-indent-guides'
+
 " Tabline / bufferline plugins. Not all of them work with airline
 " See vim-buftabline github page for alternatives
 " Plug 'ap/vim-buftabline'
@@ -117,23 +120,24 @@ set nrformats-=octal
 set undolevels=10000
 set undofile
 
-highlight SpellBad term=underline gui=undercurl guisp=Orange
-
 set ttimeout
 set ttimeoutlen=100
 
 set hlsearch        " highlight search matches
 set noincsearch     " jumps to first match as you type
 
-" Use <C-L> to clear the highlighting of :set hlsearch.
-if maparg('<C-L>', 'n') ==# ''
-    nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
-endif
-
+set t_Co=256
 set display+=lastline
 set laststatus=2
 set ruler
 set wildmenu
+
+set number
+set textwidth=79
+set visualbell
+set cursorline
+set history=1000
+set lazyredraw
 
 if !&scrolloff
     set scrolloff=3     " how many lines to bottom cause scrolling
@@ -148,19 +152,11 @@ endif
 
 filetype plugin indent on
 
-set t_Co=256
 if has('autocmd')
     filetype plugin indent on
 endif
 
 syntax enable
-
-set number
-set textwidth=79
-set visualbell
-set cursorline
-set history=1000
-set lazyredraw
 
 " set autoformat options (think gq). See http://vimdoc.sourceforge.net/htmldoc/change.html#fo-table
 set formatoptions=tcqrn1
@@ -192,6 +188,70 @@ set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
+" preferences for where the split happens
+set splitbelow
+set splitright
+set nuw=6               " increase size of gutter column
+set foldcolumn=1        " increase size of fold column
+"
+" buffer movement, this doesn't work in Tmux
+noremap <C-left> :bprev!<CR>
+noremap <C-right> :bnext!<CR>
+
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+"
+" Use <C-L> to clear the highlighting of :set hlsearch.
+if maparg('<C-L>', 'n') ==# ''
+    nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+endif
+
+" Specify the behavior when switching between buffers
+try
+    set switchbuf=useopen,usetab,newtab
+    "set stal=2 " ???
+catch
+endtry
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" hit \D to insert date in format 2014-05-30
+:nnoremap <Leader>D "=strftime("%Y-%m-%d")<CR>P
+:inoremap <Leader>D <C-R>=strftime("%Y-%m-%d")<CR>
+
+
+"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
+"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
+"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
+if (empty($TMUX))
+  if (has("nvim"))
+    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  endif
+  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
+  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
+  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+endif
+
+set termguicolors
+
+" colorscheme flatcolor
+" colorscheme alduin
+colorscheme flatcolor
+highlight Normal guibg=#000000
+highlight Todo guibg=red
+highlight SpellBad term=underline gui=undercurl guisp=Orange
+
+" not really, nvim has no gui, just to remind myself what font I use
+set guifont=LiterationMonoPowerline\ Nerd\ Font
+
 " navigate windows with meta+arrows (including 'escape' from terminal)
 map <A-l> <c-w>l
 map <A-h> <c-w>h
@@ -210,64 +270,9 @@ imap <A-j> <ESC><c-w>j
 :nnoremap <A-k> <C-w>k
 :nnoremap <A-l> <C-w>l
 
-" buffer movement, this doesn't work in Tmux
-noremap <C-left> :bprev!<CR>
-noremap <C-right> :bnext!<CR>
-
-" Return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
-
-" Specify the behavior when switching between buffers
-try
-    set switchbuf=useopen,usetab,newtab
-    "set stal=2 " ???
-catch
-endtry
-
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" hit \D to insert date in format 2014-05-30
-:nnoremap <Leader>D "=strftime("%Y-%m-%d")<CR>P
-:inoremap <Leader>D <C-R>=strftime("%Y-%m-%d")<CR>
-
-" preferences for where the split happens
-set splitbelow
-set splitright
-
-" colo molokai
-set termguicolors
-
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
-
-" colorscheme flatcolor
-" colorscheme alduin
-colorscheme flatcolor
-highlight Normal guibg=#000000
-highlight Todo guibg=red
-
-" not really, nvim has no gui, just to remind myself what font I use
-set guifont=LiterationMonoPowerline\ Nerd\ Font
-
-set nuw=6               " increase size of gutter column
-set foldcolumn=1        " increase size of fold column
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=DarkSlateGray
 
 " }}}
 
