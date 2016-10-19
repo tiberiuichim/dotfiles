@@ -56,6 +56,9 @@ Plug 'milsen/vim-operator-substitute'
 " Toggle comments with tcc
 Plug 'tomtom/tcomment_vim'
 
+" Change surrounding parens: cs'"
+Plug 'tpope/vim-surround'
+
 " EditorConfig, global/per project configuration of whitespace settings
 Plug 'editorconfig/editorconfig-vim'
 
