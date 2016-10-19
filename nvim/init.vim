@@ -405,6 +405,7 @@ endfunction
 set showtabline=2     " always show the tabline
 
 let g:lightline = {
+      \ 'colorscheme': 'PaperColor_dark',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste'], [ 'alestatus' ], [ 'fugitive', 'filename', 'modified' ] ],
