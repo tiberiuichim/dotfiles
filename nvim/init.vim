@@ -89,8 +89,11 @@ Plug 'mileszs/ack.vim'
 " The :EasyAlign command
 Plug 'junegunn/vim-easy-align'
 
-" Show indent guides with <leader>ig
-Plug 'nathanaelkane/vim-indent-guides'
+" Show indent guides
+Plug 'Yggdroot/indentLine'
+
+" Always highlight enclosing tags
+Plug 'valloric/matchtagalways'
 
 " Tabline / bufferline plugins. Not all of them work with airline
 " See vim-buftabline github page for alternatives
@@ -270,9 +273,9 @@ imap <A-j> <ESC><c-w>j
 :nnoremap <A-k> <C-w>k
 :nnoremap <A-l> <C-w>l
 
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=DarkSlateGray
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=DarkSlateGray
 
 " }}}
 
@@ -293,6 +296,13 @@ nmap <leader>7 <Plug>BufTabLine.Go(7)
 nmap <leader>8 <Plug>BufTabLine.Go(8)
 nmap <leader>9 <Plug>BufTabLine.Go(9)
 nmap <leader>0 <Plug>BufTabLine.Go(10)
+
+
+let g:indentLine_char = '│'
+let g:indentLine_color_gui = '#111111'
+
+" jump to the other tag with \z
+nnoremap <leader>z :MtaJumpToOtherTag<cr>
 
 " asynchronous lint engine (ale) settings
 let g:ale_linters = {
@@ -841,5 +851,8 @@ endfunction
 "
 " dirvish, alternate file explorer in split
 " Plug 'justinmk/vim-dirvish'
+
+" Show indent guides with <leader>ig
+" Plug 'nathanaelkane/vim-indent-guides'
 
 " }}}
