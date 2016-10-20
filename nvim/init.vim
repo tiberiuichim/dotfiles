@@ -113,9 +113,10 @@ call plug#end()
 set autoindent
 set backspace=indent,eol,start
 set complete-=i
-set smarttab
+set nosmarttab
 set tabstop=4   " not liking big tabs
 set shiftwidth=4
+set expandtab
 
 set nrformats-=octal
 
@@ -378,6 +379,8 @@ augroup configgroup
     autocmd FileType python setlocal nowrap
     autocmd FileType python setlocal foldlevel=99
     autocmd VimEnter *.py nested TagbarOpen
+
+    autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 
 augroup END
 " }}}
@@ -742,7 +745,6 @@ endfunction
 "   let @" = l:saved_reg
 " endfunction
 "
-"   autocmd Filetype ruby setlocal ts=2 sw=2 expandtab
 "   autocmd FileType ruby setlocal tabstop=2
 "   autocmd FileType ruby setlocal shiftwidth=2
 "   autocmd FileType ruby setlocal softtabstop=2
