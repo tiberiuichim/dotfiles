@@ -387,7 +387,7 @@ let g:lightline = {
       \ 'colorscheme': 'PaperColor_dark',
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste'], [ 'alestatus' ], [ 'fugitive', 'filename', 'modified' ] ],
+      \   'left': [ [ 'mode', 'paste'], [ 'alestatus' ], [ 'fugitive', 'filename', ''] ],
       \   'right': [['percent'], ['lineinfo'], ['bufsettings']]
       \ },
       \ 'component_function': {
@@ -448,7 +448,7 @@ function! LightLineBufSettings()
 endfunction
 
 function! LightLineModified()
-    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? "\ue524" : &modifiable ? '' : '-'
 endfunction
 
 function! LightLineReadonly()
