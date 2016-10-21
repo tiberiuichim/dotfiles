@@ -254,6 +254,7 @@ colorscheme flatcolor
 highlight Normal guibg=#000000
 highlight Todo guibg=red
 highlight SpellBad term=underline gui=undercurl guisp=Orange
+highlight Search guibg=#3a0b02
 
 " not really, nvim has no gui, just to remind myself what font I use
 set guifont=LiterationMonoPowerline\ Nerd\ Font
