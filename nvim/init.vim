@@ -168,7 +168,8 @@ set formatoptions=tcqrn1
 set nospell
 set noshowmode      " already provided by lightline
 set showcmd
-set nowrap
+set nowrap          " don't wrap, it's annoying
+set list            " show whitespace characters, useful
 
 " set clipboard+=unnamed      "also include system clipboard in the default yank registers
 
