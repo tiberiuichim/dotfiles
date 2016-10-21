@@ -110,49 +110,7 @@ call plug#end()
 "
 " Some of this stuff is lifted from sensible.vim
 
-set autoindent
-set backspace=indent,eol,start
-set complete-=i
-set nosmarttab
-set tabstop=4   " not liking big tabs
-set shiftwidth=4
-set expandtab
-
-set nrformats-=octal
-
-" undo settings
-set undolevels=10000
-set undofile
-
-set ttimeout
-set ttimeoutlen=100
-
-set hlsearch        " highlight search matches
-set noincsearch     " jumps to first match as you type
-
-set t_Co=256
-set display+=lastline
-set laststatus=2
-set ruler
-set wildmenu
-
-set number
-set textwidth=79
-set visualbell
-set cursorline
-set history=1000
-set lazyredraw
-
-if !&scrolloff
-    set scrolloff=3     " how many lines to bottom cause scrolling
-endif
-if !&sidescrolloff
-    set sidescrolloff=5
-endif
-
-if &listchars ==# 'eol:$'
-    set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-endif
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 filetype plugin indent on
 
@@ -162,47 +120,79 @@ endif
 
 syntax enable
 
-" set autoformat options (think gq). See http://vimdoc.sourceforge.net/htmldoc/change.html#fo-table
-set formatoptions=tcqrn1
-
-set nospell
-set noshowmode      " already provided by lightline
-set showcmd
-set nowrap          " don't wrap, it's annoying
-set list            " show whitespace characters, useful
-
-" set clipboard+=unnamed      "also include system clipboard in the default yank registers
-
-" when searching, ignore case if all letters lowercase
-" set ignorecase
-" set smartcase     " override ignorecase if term has caps
-set showmatch
-
-set listchars=tab:▸\ ,eol:¬
-
-" folding stuff
-set foldlevelstart=0    " most folds opened by default
-set foldmethod=marker   " fold based on markers level
-" set foldenable    " this makes the folds closed when file is opened
-" space open/closes folds
-nnoremap <space> za
-
-" backups
-set backup
+set autoindent
+set backspace=indent,eol,start
+set backup      " backups
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set backupskip=/tmp/*,/private/tmp/*
+set complete-=i
+set cursorline
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set display+=lastline
+set expandtab
+set foldcolumn=1        " increase size of fold column
+set foldlevelstart=0    " most folds opened by default
+set foldmethod=marker   " fold based on markers level
+set formatoptions=tcqrn1        " set autoformat options (think gq). See http://vimdoc.sourceforge.net/htmldoc/change.html#fo-table
+set history=1000
+set hlsearch        " highlight search matches
+set laststatus=2
+set lazyredraw
+set list            " show whitespace characters, useful
+set listchars=tab:▸\ ,trail:•,extends:>,precedes:<,nbsp:+,eol:¬
+set noincsearch     " jumps to first match as you type
+set noshowmode      " already provided by lightline
+set nosmarttab
+set nospell
+set nowrap          " don't wrap, it's annoying
+set nrformats-=octal
+set number
+set nuw=6               " increase size of gutter column
+set ruler
+set scrolloff=3     " how many lines to bottom cause scrolling
+set shiftwidth=4
+set showcmd
+set showmatch
+set showtabline=2     " always show the tabline
+set sidescrolloff=5
+set splitbelow      " preferences for where the split happens
+set splitright
+set tabstop=4   " not liking big tabs
+set termguicolors
+set textwidth=79
+set ttimeout
+set ttimeoutlen=100
+set undofile
+set undolevels=10000        " undo settings
+set visualbell
+set wildmenu
 set writebackup
 
-" preferences for where the split happens
-set splitbelow
-set splitright
-set nuw=6               " increase size of gutter column
-set foldcolumn=1        " increase size of fold column
+" set foldenable    " this makes the folds closed when file is opened
+" set ignorecase        " when searching, ignore case if all letters lowercase
+" set smartcase     " override ignorecase if term has caps
+" set clipboard+=unnamed      "also include system clipboard in the default yank registers
+" Specify the behavior when switching between buffers
+try
+    set switchbuf=useopen,usetab,newtab
+catch
+endtry
+
+" colorscheme flatcolor
+" colorscheme alduin
+colorscheme flatcolor
+
+highlight Normal guibg=#000000
+highlight Todo guibg=red
+highlight SpellBad term=underline gui=undercurl guisp=Orange
+highlight Search guibg=#3a0b02
+
+" space open/closes folds
+nnoremap <space> za
 "
 " buffer movement, this doesn't work in Tmux
-noremap <C-left> :bprev!<CR>
-noremap <C-right> :bnext!<CR>
+nnoremap <C-left> :bprev!<CR>
+nnoremap <C-right> :bnext!<CR>
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
@@ -215,49 +205,12 @@ if maparg('<C-L>', 'n') ==# ''
     nnoremap <silent> <C-L> :nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
 
-" Specify the behavior when switching between buffers
-try
-    set switchbuf=useopen,usetab,newtab
-    "set stal=2 " ???
-catch
-endtry
-
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " hit \D to insert date in format 2014-05-30
 :nnoremap <Leader>D "=strftime("%Y-%m-%d")<CR>P
 :inoremap <Leader>D <C-R>=strftime("%Y-%m-%d")<CR>
-
-
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
-
-set termguicolors
-
-" colorscheme flatcolor
-" colorscheme alduin
-colorscheme flatcolor
-highlight Normal guibg=#000000
-highlight Todo guibg=red
-highlight SpellBad term=underline gui=undercurl guisp=Orange
-highlight Search guibg=#3a0b02
-
-" not really, nvim has no gui, just to remind myself what font I use
-set guifont=LiterationMonoPowerline\ Nerd\ Font
 
 " navigate windows with meta+arrows (including 'escape' from terminal)
 map <A-l> <c-w>l
@@ -277,15 +230,16 @@ imap <A-j> <ESC><c-w>j
 :nnoremap <A-k> <C-w>k
 :nnoremap <A-l> <C-w>l
 
-" let g:indent_guides_auto_colors = 0
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black
-" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=DarkSlateGray
-
 " }}}
 
 " ---- Plugin configurations --- {{{
 
-runtime! macros/matchit.vim
+" setup proper python support
+"
+let mypython = expand("$HOME/tools/bin/python2")
+if executable(mypython)
+    let g:python_host_prog = mypython
+endif
 
 " buftabline configuration
 let g:buftabline_numbers = 2    " show buffer position next to each buffer label
@@ -338,7 +292,6 @@ let g:NERDTreeIndicatorMapCustom = {
             \ "Unknown"   : "?"
             \ }
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$', '\.egg-info$', '\~$', '\.git$', '\.eggs']
-
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 
@@ -407,8 +360,6 @@ endfunction
 " ---- Lightline configuration ---- {{{
 " components are name:function to call
 " use the active: left/right lists to control what shows where
-
-set showtabline=2     " always show the tabline
 
 let g:lightline = {
       \ 'colorscheme': 'PaperColor_dark',
@@ -481,18 +432,6 @@ function! LightLineFilename()
               \ ('' != fname ? fname : '[No Name]') .
               \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
-
-" function! LightLineFugitive()
-"   try
-"     if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
-"       let mark = ''  " edit here for cool mark
-"       let branch = fugitive#head()
-"       return branch !=# '' ? mark.branch : ''
-"     endif
-"   catch
-"   endtry
-"   return ''
-" endfunction
 
 function! LightLineFugitive()
   if &ft !~? 'vimfiler\|gundo' && exists("*fugitive#head")
@@ -860,5 +799,20 @@ endfunction
 
 " Show indent guides with <leader>ig
 " Plug 'nathanaelkane/vim-indent-guides'
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=black
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=DarkSlateGray
+
+" function! LightLineFugitive()
+"   try
+"     if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+"       let mark = ''  " edit here for cool mark
+"       let branch = fugitive#head()
+"       return branch !=# '' ? mark.branch : ''
+"     endif
+"   catch
+"   endtry
+"   return ''
+" endfunction
 
 " }}}
