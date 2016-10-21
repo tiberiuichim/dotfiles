@@ -142,6 +142,8 @@ set list            " show whitespace characters, useful
 set listchars=tab:▸\ ,trail:•,extends:>,precedes:<,nbsp:+,eol:¬
 set noincsearch     " jumps to first match as you type
 set noshowmode      " already provided by lightline
+set nosmartcase
+set nosmartindent
 set nosmarttab
 set nospell
 set nowrap          " don't wrap, it's annoying
@@ -178,14 +180,13 @@ try
 catch
 endtry
 
-" colorscheme flatcolor
-" colorscheme alduin
 colorscheme flatcolor
 
 highlight Normal guibg=#000000
 highlight Todo guibg=red
 highlight SpellBad term=underline gui=undercurl guisp=Orange
 highlight Search guibg=#3a0b02
+highlight Visual guibg=#0a4b1a
 
 " space open/closes folds
 nnoremap <space> za
@@ -207,6 +208,10 @@ endif
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Execute current line or current selection as Vim EX commands.
+nnoremap <leader>x :exe getline(".")<CR>
+vnoremap <leader>X :<C-w>exe join(getline("'<","'>"),'<Bar>')<CR>
 
 " hit \D to insert date in format 2014-05-30
 :nnoremap <Leader>D "=strftime("%Y-%m-%d")<CR>P
