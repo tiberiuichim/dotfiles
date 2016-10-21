@@ -81,7 +81,7 @@ Plug 'ap/vim-css-color'
 
 " Nice colors in status bar
 Plug 'itchyny/lightline.vim'
-Plug 'mgee/lightline-bufferline', {'branch': 'add-ordinal-buffer-numbering'}
+Plug 'mgee/lightline-bufferline'    " , {'branch': 'add-ordinal-buffer-numbering'}
 
 " Use :Ack to search with ag
 Plug 'mileszs/ack.vim'
@@ -135,10 +135,6 @@ endfunction
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 filetype plugin indent on
-
-if has('autocmd')
-    filetype plugin indent on
-endif
 
 syntax enable
 
@@ -392,7 +388,7 @@ let g:lightline = {
       \ 'mode_map': { 'c': 'NORMAL' },
       \ 'active': {
       \   'left': [ [ 'mode', 'paste'], [ 'alestatus' ], [ 'fugitive', 'filename', 'modified' ] ],
-      \   'right': [['percent'], ['lineinfo']]
+      \   'right': [['percent'], ['lineinfo'], ['bufsettings']]
       \ },
       \ 'component_function': {
       \   'modified': 'LightLineModified',
@@ -404,6 +400,7 @@ let g:lightline = {
       \   'fileencoding': 'LightLineFileencoding',
       \   'mode': 'LightLineMode',
       \   'alestatus': 'LightLineAleStatus',
+      \   'bufsettings': 'LightLineBufSettings',
       \ },
       \ 'component': {
       \   'readonly': '%{&readonly?"":""}',
@@ -441,12 +438,21 @@ function! LightLineAleStatus()
     return ('' != ALEGetStatusLine() ? '-ALE-' . ALEGetStatusLine() : '-|-')
 endfunction
 
+function! LightLineBufSettings()
+    if &et ==# 1
+        let et = "•"
+    else
+        let et = "➜"
+    endif
+    return ('ts'. &ts . '│sw'. &sw . '│et' . et)
+endfunction
+
 function! LightLineModified()
     return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
 
 function! LightLineReadonly()
-  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '⭤' : ''
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? '' : ''
 endfunction
 
 function! LightLineFilename()
@@ -459,10 +465,21 @@ function! LightLineFilename()
               \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
+" for more symbols, see this:
+" U+E0A0     Version control branch
+" U+E0A1     LN (line) symbol
+" U+E0A2     Closed padlock
+" U+E0B0     Rightwards black arrowhead
+" U+E0B1     Rightwards arrowhead
+" U+E0B2     Leftwards black arrowhead
+" U+E0B3     Leftwards arrowhead
+" To test them in terminal, run:
+" echo -e "\ue0a0\ue0a1\ue0a2\ue0b0\ue0b1\ue0b2\ue0b3"
+
 function! LightLineFugitive()
   if &ft !~? 'vimfiler\|gundo' && exists("*fugitive#head")
     let branch = fugitive#head()
-    return branch !=# '' ? '⭠ '.branch : ''
+    return branch !=# '' ? "\ue0a0 ".branch : ''
   endif
   return ''
 endfunction
