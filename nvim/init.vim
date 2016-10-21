@@ -166,10 +166,11 @@ syntax enable
 set formatoptions=tcqrn1
 
 set nospell
-" set clipboard+=unnamed      "also include system clipboard in the default yank registers
-
 set noshowmode      " already provided by lightline
 set showcmd
+set nowrap
+
+" set clipboard+=unnamed      "also include system clipboard in the default yank registers
 
 " when searching, ignore case if all letters lowercase
 " set ignorecase
