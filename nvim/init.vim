@@ -17,14 +17,14 @@ endif
 "   :PlugClean!
 " NOTE: Make sure you use single quotes when defining Plug
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/nvim-plugged')
 "
 " ALE (Asynchronous Lint Engine) is a plugin for providing linting in NeoVim
 " and Vim 8 while you edit your text files.
 " See https://github.com/maralla/validator.vim for a better one??
 " or https://github.com/neomake/neomake
-Plug 'w0rp/ale'     " , {'tag':'v1.0.0'}
-" Plug 'scrooloose/syntastic'
+" Plug 'w0rp/ale'     " , {'tag':'v1.0.0'}
+Plug 'scrooloose/syntastic'
 "
 " Helpers for writing vim scripts: :PP (pretty print), :Runtime (reload
 " runtime), zS (show syntax groups),
@@ -46,7 +46,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " Everything programming language syntax and indent
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 
 " Python 'tags' in a tagbar
 Plug 'majutsushi/tagbar'
@@ -312,6 +312,14 @@ let g:ale_lint_on_save = 1
 
 " syntastic configuration
 let g:syntastic_python_checkers = ['pyflakes']
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
