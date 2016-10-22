@@ -18,6 +18,17 @@ endif
 " NOTE: Make sure you use single quotes when defining Plug
 
 call plug#begin('~/.vim/plugged')
+"
+" ALE (Asynchronous Lint Engine) is a plugin for providing linting in NeoVim
+" and Vim 8 while you edit your text files.
+" See https://github.com/maralla/validator.vim for a better one??
+" or https://github.com/neomake/neomake
+Plug 'w0rp/ale'     " , {'tag':'v1.0.0'}
+" Plug 'scrooloose/syntastic'
+"
+" Helpers for writing vim scripts: :PP (pretty print), :Runtime (reload
+" runtime), zS (show syntax groups),
+Plug 'tpope/vim-scriptease'
 
 " The inimitable NerdTree
 Plug 'scrooloose/nerdtree'
@@ -36,12 +47,6 @@ Plug 'tpope/vim-fugitive'
 
 " Everything programming language syntax and indent
 Plug 'sheerun/vim-polyglot'
-
-" ALE (Asynchronous Lint Engine) is a plugin for providing linting in NeoVim
-" and Vim 8 while you edit your text files.
-" See https://github.com/maralla/validator.vim for a better one??
-" or https://github.com/neomake/neomake
-Plug 'w0rp/ale'
 
 " Python 'tags' in a tagbar
 Plug 'majutsushi/tagbar'
@@ -101,7 +106,7 @@ Plug 'valloric/matchtagalways'
 
 " Adds :Gundo, a visual tree of the undo
 Plug 'sjl/gundo.vim'
-"
+
 call plug#end()
 
 " }}}
@@ -134,6 +139,7 @@ endfunction
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
+filetype plugin on
 filetype plugin indent on
 
 syntax enable
@@ -200,7 +206,7 @@ endtry
 
 colorscheme flatcolor
 
-highlight Normal guibg=#000000
+" highlight Normal guibg=#000000
 highlight Todo guibg=red
 highlight SpellBad term=underline gui=undercurl guisp=Orange
 highlight Search guibg=#3a0b02
@@ -259,9 +265,13 @@ imap <A-j> <ESC><c-w>j
 
 " setup proper python support
 "
-let mypython = expand("$HOME/tools/bin/python2")
-if executable(mypython)
-    let g:python_host_prog = mypython
+let s:py2 = expand("$HOME/tools/bin/python2")
+if executable(s:py2)
+    let g:python_host_prog = s:py2
+endif
+let s:py3 = expand("$HOME/tools3/bin/python")
+if executable(s:py3)
+    let g:python3_host_prog = s:py3
 endif
 
 " buftabline configuration
@@ -286,12 +296,22 @@ let g:indentLine_color_gui = '#111111'
 nnoremap <leader>z :MtaJumpToOtherTag<cr>
 
 " asynchronous lint engine (ale) settings
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'python': ['flake8'],
-\}
+" let g:ale_linters = {
+" \   'javascript': ['eslint'],
+" \   'python': ['flake8'],
+" \}
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
 let g:ale_sign_column_always = 1
 let g:ale_lint_on_save = 1
+
+" let g:ale_sign_error = '>>'
+" let g:ale_sign_warning = '--'
+
+" syntastic configuration
+let g:syntastic_python_checkers = ['pyflakes']
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -384,37 +404,42 @@ augroup END
 " use the active: left/right lists to control what shows where
 
 let g:lightline = {
-      \ 'colorscheme': 'PaperColor_dark',
-      \ 'mode_map': { 'c': 'NORMAL' },
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste'], [ 'alestatus' ], [ 'fugitive', 'filename', ''] ],
-      \   'right': [['percent'], ['lineinfo'], ['bufsettings']]
-      \ },
-      \ 'component_function': {
-      \   'modified': 'LightLineModified',
-      \   'readonly': 'LightLineReadonly',
-      \   'fugitive': 'LightLineFugitive',
-      \   'filename': 'LightLineFilename',
-      \   'filetype': 'LightLineFiletype',
-      \   'fileformat': 'LightLineFileformat',
-      \   'fileencoding': 'LightLineFileencoding',
-      \   'mode': 'LightLineMode',
-      \   'alestatus': 'LightLineAleStatus',
-      \   'bufsettings': 'LightLineBufSettings',
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&readonly?"":""}',
-      \ },
-      \ 'component_type': {
-      \     'alestatus': 'error',
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' },
-      \ }
+            \ 'colorscheme': 'PaperColor_dark',
+            \ 'mode_map': { 'c': 'NORMAL' },
+            \ 'active': {
+            \   'left': [[ 'mode', 'paste'], ['fugitive', 'filename']],
+            \   'right': [['percent'], ['lineinfo'], ['bufsettings']]
+            \ },
+            \ 'component_function': {
+            \   'modified': 'LightLineModified',
+            \   'readonly': 'LightLineReadonly',
+            \   'fugitive': 'LightLineFugitive',
+            \   'filename': 'LightLineFilename',
+            \   'filetype': 'LightLineFiletype',
+            \   'fileformat': 'LightLineFileformat',
+            \   'fileencoding': 'LightLineFileencoding',
+            \   'mode': 'LightLineMode',
+            \   'bufsettings': 'LightLineBufSettings',
+            \ },
+            \ 'component': {
+            \   'readonly': '%{&readonly?"":""}',
+            \ },
+            \ 'separator': { 'left': '', 'right': '' },
+            \ 'subseparator': { 'left': '', 'right': '' },
+            \ }
+"
+            " \ 'component_expand': {
+            " \   'alestatus': 'LightLineAleStatus',
+            " \ },
 
+            " \ 'component_visible_condition': {
+            " \ },
+            " \ 'component_function_visible_condition': {
+            " \   'alestatus': 'g:LightLineAleStatusShow()',
+            " \ },
 let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
-let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
-let g:lightline.component_type   = {'buffers': 'tabsel'}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers', 'alestatus': 'LightLineAleStatus'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}    " , 'alestatus': 'error'}
 
 let g:lightline#bufferline#show_number  = 1
 let g:lightline#bufferline#shorten_path = 1
@@ -422,11 +447,27 @@ let g:lightline#bufferline#unnamed      = '[...]'
 let g:lightline#bufferline#show_number  = 2
 let g:lightline#bufferline#filename_modifier  = ':t'    " only show filename. See :help filename-modifiers for more options
 
+" function! g:LightLineAleStatusShow()
+"     let l:linters = keys(g:ale_linters)
+"     if index(l:linters, &ft) == -1
+"         echom "will not show"
+"         return 0
+"     endif
+"     echom "will show"
+"     return 1
+" endfunction
+"
 " TODO: make the alestatus work properly, show as error
-let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
-function! LightLineAleStatus()
-    return ('' != ALEGetStatusLine() ? '-ALE-' . ALEGetStatusLine() : '-|-')
-endfunction
+"
+" let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+" let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '']
+" function! LightLineAleStatus()
+"     let l:linters = keys(g:ale_linters)
+"     if index(l:linters, &ft) == -1
+"         return ''
+"     endif
+"     return ('' != ALEGetStatusLine() ? ['', '-' . ALEGetStatusLine(), '' ] : '')
+" endfunction
 
 function! LightLineBufSettings()
     let et = &et ==# 1 ? "•" : "➜"
