@@ -418,19 +418,9 @@ let g:lightline.component_type   = {'buffers': 'tabsel'}
 
 let g:lightline#bufferline#show_number  = 1
 let g:lightline#bufferline#shorten_path = 1
-let g:lightline#bufferline#unnamed      = '[No Name]'
+let g:lightline#bufferline#unnamed      = '[...]'
 let g:lightline#bufferline#show_number  = 2
-
-nmap <Leader>1 <Plug>lightline#bufferline#go(1)
-nmap <Leader>2 <Plug>lightline#bufferline#go(2)
-nmap <Leader>3 <Plug>lightline#bufferline#go(3)
-nmap <Leader>4 <Plug>lightline#bufferline#go(4)
-nmap <Leader>5 <Plug>lightline#bufferline#go(5)
-nmap <Leader>6 <Plug>lightline#bufferline#go(6)
-nmap <Leader>7 <Plug>lightline#bufferline#go(7)
-nmap <Leader>8 <Plug>lightline#bufferline#go(8)
-nmap <Leader>9 <Plug>lightline#bufferline#go(9)
-nmap <Leader>0 <Plug>lightline#bufferline#go(10)
+let g:lightline#bufferline#filename_modifier  = ':t'    " only show filename. See :help filename-modifiers for more options
 
 " TODO: make the alestatus work properly, show as error
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
@@ -439,16 +429,12 @@ function! LightLineAleStatus()
 endfunction
 
 function! LightLineBufSettings()
-    if &et ==# 1
-        let et = "•"
-    else
-        let et = "➜"
-    endif
-    return ('ts'. &ts . '│sw'. &sw . '│et' . et)
+    let et = &et ==# 1 ? "•" : "➜"
+    return ('ts│'. &tabstop . '│sw│'. &shiftwidth . '│et│' . et)
 endfunction
 
 function! LightLineModified()
-    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? "\ue524" : &modifiable ? '' : '-'
+    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? "+" : &modifiable ? '' : '-'
 endfunction
 
 function! LightLineReadonly()
@@ -499,6 +485,17 @@ endfunction
 function! LightLineMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+
+nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 
 " }}}
 
