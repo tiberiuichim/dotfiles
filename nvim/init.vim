@@ -23,8 +23,8 @@ call plug#begin('~/.vim/nvim-plugged')
 " and Vim 8 while you edit your text files.
 " See https://github.com/maralla/validator.vim for a better one??
 " or https://github.com/neomake/neomake
-" Plug 'w0rp/ale'     " , {'tag':'v1.0.0'}
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
+" Plug 'scrooloose/syntastic'
 "
 " Helpers for writing vim scripts: :PP (pretty print), :Runtime (reload
 " runtime), zS (show syntax groups),
@@ -131,6 +131,15 @@ function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
   exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 
+function! Identify()
+    let l:h = hostname()
+    if match(l:h, 'Lenovo')
+        return 'laptop'
+    else
+        return 'desktop'
+    endif
+endfunction
+
 " }}}
 "
 " ---- Personal preferences ---- {{{
@@ -138,6 +147,7 @@ endfunction
 " Some of this stuff is lifted from sensible.vim
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let g:my_machine = Identify()
 
 filetype plugin on
 filetype plugin indent on
@@ -204,13 +214,18 @@ try
 catch
 endtry
 
-colorscheme flatcolor
-
-" highlight Normal guibg=#000000
-highlight Todo guibg=red
-highlight SpellBad term=underline gui=undercurl guisp=Orange
-highlight Search guibg=#3a0b02
-highlight Visual guibg=#0a4b1a
+if g:my_machine ==# 'laptop'
+    colorscheme NeoSolarized
+    set background=dark
+else
+    colorscheme flatcolor
+    set background=dark
+    highlight Normal guibg=#000000
+    highlight Todo guibg=red
+    highlight SpellBad term=underline gui=undercurl guisp=Orange
+    highlight Search guibg=#3a0b02
+    highlight Visual guibg=#0a4b1a
+endif
 
 " space open/closes folds
 nnoremap <space> za
@@ -310,17 +325,6 @@ let g:ale_lint_on_save = 1
 " let g:ale_sign_error = '>>'
 " let g:ale_sign_warning = '--'
 
-" syntastic configuration
-let g:syntastic_python_checkers = ['pyflakes']
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
   " let g:ackprg = 'ag --nogroup --nocolor --column'
@@ -412,10 +416,8 @@ augroup END
 " use the active: left/right lists to control what shows where
 
 let g:lightline = {
-            \ 'colorscheme': 'PaperColor_dark',
-            \ 'mode_map': { 'c': 'NORMAL' },
             \ 'active': {
-            \   'left': [[ 'mode', 'paste'], ['fugitive', 'filename']],
+            \   'left': [[ 'mode', 'paste', 'alestatus'], ['fugitive', 'filename']],
             \   'right': [['percent'], ['lineinfo'], ['bufsettings']]
             \ },
             \ 'component_function': {
@@ -435,47 +437,31 @@ let g:lightline = {
             \ 'separator': { 'left': '', 'right': '' },
             \ 'subseparator': { 'left': '', 'right': '' },
             \ }
-"
-            " \ 'component_expand': {
-            " \   'alestatus': 'LightLineAleStatus',
-            " \ },
 
-            " \ 'component_visible_condition': {
-            " \ },
-            " \ 'component_function_visible_condition': {
-            " \   'alestatus': 'g:LightLineAleStatusShow()',
-            " \ },
+let g:lightline.colorscheme      = 'wombat'
+let g:lightline.mode_map         = { 'c': 'NORMAL' }
 let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
-let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers', 'alestatus': 'LightLineAleStatus'}
-let g:lightline.component_type   = {'buffers': 'tabsel'}    " , 'alestatus': 'error'}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers', 'alestatus': 'g:LightLineAleStatus'}
+let g:lightline.component_type   = {'buffers': 'tabsel' , 'alestatus': 'error'}
 
 let g:lightline#bufferline#show_number  = 1
 let g:lightline#bufferline#shorten_path = 1
 let g:lightline#bufferline#unnamed      = '[...]'
 let g:lightline#bufferline#show_number  = 2
 let g:lightline#bufferline#filename_modifier  = ':t'    " only show filename. See :help filename-modifiers for more options
-
-" function! g:LightLineAleStatusShow()
-"     let l:linters = keys(g:ale_linters)
-"     if index(l:linters, &ft) == -1
-"         echom "will not show"
-"         return 0
-"     endif
-"     echom "will show"
-"     return 1
-" endfunction
 "
-" TODO: make the alestatus work properly, show as error
-"
-" let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '⬥ ok']
+let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '']
 " let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '']
-" function! LightLineAleStatus()
-"     let l:linters = keys(g:ale_linters)
-"     if index(l:linters, &ft) == -1
-"         return ''
-"     endif
-"     return ('' != ALEGetStatusLine() ? ['', '-' . ALEGetStatusLine(), '' ] : '')
-" endfunction
+function! g:LightLineAleStatus()
+    let l:s = ALEGetStatusLine()
+    return ('' != l:s ? ['', l:s, '' ] : '')
+endfunction
+
+augroup alestatusupdate
+    autocmd!
+    autocmd BufEnter,BufRead * call ale#Queue(0)|call lightline#update()
+    autocmd BufWritePre * :call lightline#update()
+augroup END
 
 function! LightLineBufSettings()
     let et = &et ==# 1 ? "•" : "➜"
@@ -884,5 +870,16 @@ nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 "   endtry
 "   return ''
 " endfunction
+" syntastic configuration
+" let g:syntastic_python_checkers = ['pyflakes']
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 1
+
 
 " }}}
