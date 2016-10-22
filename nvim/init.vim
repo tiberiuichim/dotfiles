@@ -430,7 +430,7 @@ endfunction
 
 function! LightLineBufSettings()
     let et = &et ==# 1 ? "•" : "➜"
-    return ('ts│'. &tabstop . '│sw│'. &shiftwidth . '│et│' . et)
+    return ('│ts│'. &tabstop . '│sw│'. &shiftwidth . '│et│' . et . '│')
 endfunction
 
 function! LightLineModified()
