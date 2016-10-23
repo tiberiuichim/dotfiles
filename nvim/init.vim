@@ -234,13 +234,13 @@ if g:my_machine ==# 'laptop'
     " let base16colorspace=256
     " colo base16-default-dark
     " colo molokai
-    colo alduin
     " colo hybrid
-    set background=dark
     " colo PaperColor
-    highlight Normal guibg=#121212
-    highlight CursorLine guibg=#020310
+    " highlight Normal guibg=#121212
+    " highlight CursorLine guibg=#020310
     " highlight Normal guifg=#e0e0e0 guibg=#2C3E50
+    set background=dark
+    colo alduin
 else
     colorscheme flatcolor
     set background=dark
