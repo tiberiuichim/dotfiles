@@ -97,6 +97,10 @@ Plug 'NLKNguyen/papercolor-theme'
 " changes cursor shape to beam in insert mode
 Plug 'jszakmeister/vim-togglecursor'
 
+" allow changing between different physical environments adequate settings with
+" :Thematic something
+Plug 'reedes/vim-thematic'
+
 " Preview css colors
 Plug 'ap/vim-css-color'
 
