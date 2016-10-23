@@ -260,6 +260,8 @@ else
     highlight Visual guibg=#0a4b1a
 endif
 
+:highlight EndOfBuffer guifg=bg     " hide ~ at end of buffers
+
 " let g:despacio_Sunset = 1
 " let g:despacio_Twilight = 1
 " let g:despacio_Midnight = 1
