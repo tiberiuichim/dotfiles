@@ -80,6 +80,18 @@ Plug 'joshdick/onedark.vim'
 Plug 'nanotech/jellybeans.vim'
 Plug 'rakr/vim-two-firewatch'
 Plug 'romainl/Apprentice'
+Plug 'tomasr/molokai'
+Plug 'chriskempson/base16-vim'
+Plug 'nanotech/jellybeans.vim'
+Plug 'vim-scripts/256-jungle'
+Plug 'croaker/mustang-vim'
+Plug 'zeis/vim-kolor'
+Plug 'jnurmine/Zenburn'
+Plug 'w0ng/vim-hybrid'
+Plug 'morhetz/gruvbox'
+
+" Plug 'goatslacker/mango.vim'
+" Plug 'tpope/vim-vividchalk'
 
 " Preview css colors
 Plug 'ap/vim-css-color'
@@ -215,8 +227,18 @@ catch
 endtry
 
 if g:my_machine ==# 'laptop'
-    colorscheme NeoSolarized
+    " colorscheme NeoSolarized
+    " colo base16-atelier-forest
+    " colo base16-atelier-seaside
+    " let base16colorspace=256
+    " colo base16-default-dark
+    " colo molokai
+    " colo alduin
     set background=dark
+    colo hybrid
+    highlight Normal guibg=#121212
+    highlight CursorLine guibg=#020310
+    " highlight Normal guifg=#e0e0e0 guibg=#2C3E50
 else
     colorscheme flatcolor
     set background=dark
@@ -226,6 +248,10 @@ else
     highlight Search guibg=#3a0b02
     highlight Visual guibg=#0a4b1a
 endif
+
+" let g:despacio_Sunset = 1
+" let g:despacio_Twilight = 1
+" let g:despacio_Midnight = 1
 
 " space open/closes folds
 nnoremap <space> za
@@ -433,9 +459,7 @@ let g:lightline = {
             \ },
             \ 'component': {
             \   'readonly': '%{&readonly?"":""}',
-            \ },
-            \ 'separator': { 'left': '', 'right': '' },
-            \ 'subseparator': { 'left': '', 'right': '' },
+            \ }
             \ }
 
 let g:lightline.colorscheme      = 'wombat'
@@ -443,6 +467,8 @@ let g:lightline.mode_map         = { 'c': 'NORMAL' }
 let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers', 'alestatus': 'g:LightLineAleStatus'}
 let g:lightline.component_type   = {'buffers': 'tabsel' , 'alestatus': 'error'}
+let g:lightline.separator        = { 'left': '', 'right': '' }
+let g:lightline.subseparator     = { 'left': '', 'right': '' }
 
 let g:lightline#bufferline#show_number  = 1
 let g:lightline#bufferline#shorten_path = 1
@@ -451,7 +477,7 @@ let g:lightline#bufferline#show_number  = 2
 let g:lightline#bufferline#filename_modifier  = ':t'    " only show filename. See :help filename-modifiers for more options
 "
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '']
-" let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '']
+" let g:ale_statusline_format = ['⨉ %d', '⚠ %d', ' ' ]
 function! g:LightLineAleStatus()
     let l:s = ALEGetStatusLine()
     return ('' != l:s ? ['', l:s, '' ] : '')
