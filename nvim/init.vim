@@ -177,6 +177,7 @@ set cursorline
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set display+=lastline
 set expandtab
+set fillchars=vert:│,fold:━     " this changes characters used for splits and horizontal folding
 set foldcolumn=1        " increase size of fold column
 set foldlevelstart=0    " most folds opened by default
 set foldmethod=marker   " fold based on markers level
