@@ -93,6 +93,9 @@ Plug 'NLKNguyen/papercolor-theme'
 
 " Plug 'goatslacker/mango.vim'
 " Plug 'tpope/vim-vividchalk'
+"
+" changes cursor shape to beam in insert mode
+Plug 'jszakmeister/vim-togglecursor'
 
 " Preview css colors
 Plug 'ap/vim-css-color'
