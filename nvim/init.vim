@@ -188,6 +188,7 @@ set laststatus=2
 set lazyredraw
 set list            " show whitespace characters, useful
 set listchars=tab:▸\ ,trail:•,extends:>,precedes:<,nbsp:+,eol:¬
+set mouse=
 set noincsearch     " jumps to first match as you type
 set noshowmode      " already provided by lightline
 set nosmartcase
