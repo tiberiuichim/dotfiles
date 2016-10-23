@@ -261,6 +261,7 @@ else
 endif
 
 :highlight EndOfBuffer guifg=bg     " hide ~ at end of buffers
+:highlight NonText guifg=#223311    " change color of at end of line conceal characters
 
 " let g:despacio_Sunset = 1
 " let g:despacio_Twilight = 1
