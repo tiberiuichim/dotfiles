@@ -107,6 +107,7 @@ Plug 'ap/vim-css-color'
 " Nice colors in status bar
 Plug 'itchyny/lightline.vim'
 Plug 'mgee/lightline-bufferline'    " , {'branch': 'add-ordinal-buffer-numbering'}
+Plug 'NovaDev94/lightline-onedark'  " lightline theme let g:lightline.colorscheme = 'onedark'
 
 " Use :Ack to search with ag (mapped to <leader>a )
 Plug 'mileszs/ack.vim'
@@ -480,7 +481,8 @@ let g:lightline = {
             \ }
             \ }
 
-let g:lightline.colorscheme      = 'wombat'
+" let g:lightline.colorscheme      = 'wombat'
+let g:lightline.colorscheme      = 'onedark'
 let g:lightline.mode_map         = { 'c': 'NORMAL' }
 let g:lightline.tabline          = {'left': [['buffers']], 'right': [['close']]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers', 'alestatus': 'g:LightLineAleStatus'}
@@ -512,7 +514,7 @@ function! LightLineBufSettings()
 endfunction
 
 function! LightLineModified()
-    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? "+" : &modifiable ? '' : '-'
+    return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? "✱" : &modifiable ? '' : '-'
 endfunction
 
 function! LightLineReadonly()
