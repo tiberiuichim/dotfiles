@@ -4,6 +4,22 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
+
+" TODO: add install of htmlhint and custom ~/.htmlhintrc
+" {
+"     "tagname-lowercase": true,
+"     "attr-lowercase": true,
+"     "attr-value-double-quotes": true,
+"     "doctype-first": false,
+"     "tag-pair": true,
+"     "tag-self-close": true,
+"     "spec-char-escape": true,
+"     "id-unique": true,
+"     "src-not-empty": true,
+"     "attr-no-duplication": true,
+"     "title-require": true
+" }
+
 " }}}
 
 " {{{ ---- Plugin configuration ----
@@ -360,6 +376,15 @@ nnoremap <leader>z :MtaJumpToOtherTag<cr>
 " \   'javascript': ['eslint'],
 " \   'python': ['flake8'],
 " \}
+
+call ale#linter#Define('html', {
+\   'name': 'customhtmlhint',
+\   'executable': 'htmlhint',
+\   'command': expand("htmlhint --config $HOME/.htmlhintrc --format=unix stdin"),
+\   'callback': 'ale#handlers#HandleUnixFormatAsError',
+\})
+let g:ale_linters = {}
+let g:ale_linters.html = ['customhtmlhint']
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
