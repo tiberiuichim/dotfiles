@@ -153,7 +153,7 @@ endfunction
 
 function! Identify()
     let l:h = hostname()
-    if match(l:h, 'Lenovo')
+    if match(l:h, 'Lenovo') > -1
         return 'laptop'
     else
         return 'desktop'
@@ -236,7 +236,7 @@ try
 catch
 endtry
 
-if g:my_machine ==# 'laptop'
+if (g:my_machine ==# 'laptop')
     " colorscheme NeoSolarized
     " colo base16-atelier-forest
     " colo base16-atelier-seaside
@@ -250,9 +250,9 @@ if g:my_machine ==# 'laptop'
     " highlight Normal guifg=#e0e0e0 guibg=#2C3E50
     set background=dark
     colo alduin
-else
-    colorscheme flatcolor
+elseif (g:my_machine ==# 'desktop')
     set background=dark
+    colorscheme flatcolor
     highlight Normal guibg=#000000
     highlight Todo guibg=red
     highlight SpellBad term=underline gui=undercurl guisp=Orange
