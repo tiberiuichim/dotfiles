@@ -283,6 +283,12 @@ endif
 
 :highlight EndOfBuffer guifg=bg     " hide ~ at end of buffers
 :highlight NonText guifg=#223311    " change color of at end of line conceal characters
+" let &colorcolumn=80
+highlight ColorColumn guibg=red
+
+" highlight OverLength guibg=#592929
+" match OverLength /\%81v.\+/
+" highlight the column at 80 chars
 
 " let g:despacio_Sunset = 1
 " let g:despacio_Twilight = 1
@@ -469,7 +475,7 @@ augroup configgroup
     autocmd Filetype html setlocal ts=2 sw=2 expandtab
 
     autocmd FileType python setlocal commentstring=#\ %s
-    autocmd Filetype python setlocal ts=4 sw=4 expandtab
+    autocmd Filetype python setlocal tabstop=4 shiftwidth=4 expandtab colorcolumn=80
     autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
     autocmd FileType python match Excess /\%120v.*/
     autocmd FileType python setlocal nowrap
