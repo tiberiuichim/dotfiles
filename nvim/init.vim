@@ -8,6 +8,9 @@ endif
 
 " {{{ ---- Plugin configuration ----
 
+filetype plugin on
+filetype plugin indent on
+
 " To reload plugins, after changing here:
 " :so %
 " :PlugInstall
@@ -46,7 +49,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
 " Everything programming language syntax and indent
-" Plug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 
 " Python 'tags' in a tagbar
 Plug 'majutsushi/tagbar'
@@ -131,7 +134,6 @@ Plug 'sjl/gundo.vim'
 " Adds cx<motion> to exchange texts between them
 Plug 'tommcdo/vimexchange'
 
-
 call plug#end()
 
 " }}}
@@ -173,9 +175,6 @@ endfunction
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:my_machine = Identify()
-
-filetype plugin on
-filetype plugin indent on
 
 syntax enable
 
@@ -263,6 +262,7 @@ elseif (g:my_machine ==# 'desktop')
     highlight SpellBad term=underline gui=undercurl guisp=Orange
     highlight Search guibg=#3a0b02
     highlight Visual guibg=#0a4b1a
+    " highlight Normal guibg=#100e15
 endif
 
 :highlight EndOfBuffer guifg=bg     " hide ~ at end of buffers
@@ -925,6 +925,5 @@ nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 " let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 1
-
 
 " }}}
