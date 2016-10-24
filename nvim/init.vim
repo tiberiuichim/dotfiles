@@ -127,6 +127,10 @@ Plug 'valloric/matchtagalways'
 " Adds :Gundo, a visual tree of the undo
 Plug 'sjl/gundo.vim'
 
+" Adds cx<motion> to exchange texts between them
+Plug 'tommcdo/vimexchange'
+
+
 call plug#end()
 
 " }}}
@@ -491,7 +495,6 @@ let g:lightline#bufferline#show_number  = 2
 let g:lightline#bufferline#filename_modifier  = ':t'    " only show filename. See :help filename-modifiers for more options
 "
 let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '']
-" let g:ale_statusline_format = ['⨉ %d', '⚠ %d', ' ' ]
 function! g:LightLineAleStatus()
     let l:s = ALEGetStatusLine()
     return ('' != l:s ? ['', l:s, '' ] : '')
