@@ -563,7 +563,7 @@ endfunction
 augroup alestatusupdate
     autocmd!
     autocmd BufEnter,BufRead * call ale#Queue(0)
-    autocmd User ALELint * call lightline#update()
+    autocmd User ALELint call lightline#update()
 augroup END
 
 function! LightLineBufSettings()
