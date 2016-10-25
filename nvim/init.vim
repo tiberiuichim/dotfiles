@@ -147,8 +147,8 @@ Plug 'valloric/matchtagalways'
 " Adds :Gundo, a visual tree of the undo
 Plug 'sjl/gundo.vim'
 
-" Adds cx<motion> to exchange texts between them
-Plug 'tommcdo/vimexchange'
+" Adds cx<motion> to exchange texts between them. Has problems with plug
+" Plug 'tommcdo/vimexchange'
 
 call plug#end()
 
@@ -556,10 +556,14 @@ function! g:LightLineAleStatus()
     return ('' != l:s ? ['', l:s, '' ] : '')
 endfunction
 
+" augroup alestatusupdate
+"     autocmd!
+"     " autocmd BufWritePre * :call lightline#update()
+" augroup END
 augroup alestatusupdate
     autocmd!
-    autocmd BufEnter,BufRead * call ale#Queue(0)|call lightline#update()
-    autocmd BufWritePre * :call lightline#update()
+    autocmd BufEnter,BufRead * call ale#Queue(0)
+    autocmd User ALELint * call lightline#update()
 augroup END
 
 function! LightLineBufSettings()
