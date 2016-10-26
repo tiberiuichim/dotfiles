@@ -239,7 +239,7 @@ set tabstop=4   " not liking big tabs
 set termguicolors
 set textwidth=79
 set ttimeout
-set ttimeoutlen=100
+set ttimeoutlen=10
 set undofile
 set undolevels=10000        " undo settings
 set visualbell
@@ -281,10 +281,12 @@ elseif (g:my_machine ==# 'desktop')
     " highlight Normal guibg=#100e15
 endif
 
-:highlight EndOfBuffer guifg=bg     " hide ~ at end of buffers
-:highlight NonText guifg=#223311    " change color of at end of line conceal characters
+highlight EndOfBuffer guifg=bg     " hide ~ at end of buffers
+highlight NonText guifg=#223311    " change color of at end of line conceal characters
+highlight ColorColumn guibg=#2a0111
 " let &colorcolumn=80
-highlight ColorColumn guibg=red
+" highlight ColorColumn guibg=red
+
 
 " highlight OverLength guibg=#592929
 " match OverLength /\%81v.\+/
@@ -398,8 +400,10 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_sign_column_always = 1
 let g:ale_lint_on_save = 1
 
-let g:ale_sign_error = "\u2639"     " sad smiley face
-let g:ale_sign_warning = "\u2614"     " umbrela under rain
+" let g:ale_sign_error = "\u2639"     " sad smiley face
+" let g:ale_sign_warning = "\u2614"     " umbrela under rain
+let g:ale_sign_error = "EE"     " sad smiley face
+let g:ale_sign_error = "WW"     " sad smiley face
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
