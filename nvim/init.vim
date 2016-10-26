@@ -398,8 +398,8 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 let g:ale_sign_column_always = 1
 let g:ale_lint_on_save = 1
 
-" let g:ale_sign_error = '>>'
-" let g:ale_sign_warning = '--'
+let g:ale_sign_error = "\u2639"     " sad smiley face
+let g:ale_sign_warning = "\u2614"     " umbrela under rain
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
@@ -560,6 +560,10 @@ endfunction
 "     autocmd!
 "     " autocmd BufWritePre * :call lightline#update()
 " augroup END
+" move between ALE error signs
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
 augroup alestatusupdate
     autocmd!
     autocmd BufEnter,BufRead * call ale#Queue(0)
