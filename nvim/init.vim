@@ -402,8 +402,8 @@ let g:ale_lint_on_save = 1
 
 " let g:ale_sign_error = "\u2639"     " sad smiley face
 " let g:ale_sign_warning = "\u2614"     " umbrela under rain
-let g:ale_sign_error = "EE"     " sad smiley face
-let g:ale_sign_error = "WW"     " sad smiley face
+let g:ale_sign_error = "EE"
+let g:ale_sign_warning = "WW"
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
