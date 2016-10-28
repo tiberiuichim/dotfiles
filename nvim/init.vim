@@ -138,7 +138,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'Yggdroot/indentLine'
 
 " Always highlight enclosing tags
-Plug 'valloric/matchtagalways'
+" Plug 'valloric/matchtagalways'
 
 " Tabline / bufferline plugins. Not all of them work with airline
 " See vim-buftabline github page for alternatives
