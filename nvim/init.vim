@@ -183,6 +183,20 @@ function! Identify()
     endif
 endfunction
 
+function! FilterToNewWindow()
+    " exe '!chmod +x ' . @%
+    let TempFile = tempname()
+    let SaveModified = &modified
+    exe 'w ' . TempFile
+    exe '!chmod +x ' . TempFile
+    let &modified = SaveModified
+    exe ':e ' . TempFile
+    exe '%! ' . @%
+endfunction
+
+" bash execute contents of current buffer and filter it to a new window
+command! FW call FilterToNewWindow()
+
 " }}}
 "
 " ---- Personal preferences ---- {{{
