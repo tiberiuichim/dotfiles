@@ -192,6 +192,7 @@ function! FilterToNewWindow()
     let &modified = SaveModified
     exe ':e ' . TempFile
     exe '%! ' . @%
+    exe 'w!'
 endfunction
 
 " bash execute contents of current buffer and filter it to a new window
