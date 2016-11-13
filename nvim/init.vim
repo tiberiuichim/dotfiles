@@ -284,6 +284,10 @@ if (g:my_machine ==# 'laptop')
     " highlight CursorLine guibg=#020310
     " highlight Normal guifg=#e0e0e0 guibg=#2C3E50
     set background=dark
+    let g:alduin_Shout_Become_Ethereal = 1      " black background
+    let g:alduin_Shout_Aura_Whisper = 1         " underline matching parens
+    let g:alduin_Shout_Fire_Breath = 0          " adds dark red color
+    let g:alduin_Shout_Animal_Allegiance = 1    " remove background from strings
     colo alduin
 elseif (g:my_machine ==# 'desktop')
     set background=dark
