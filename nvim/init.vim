@@ -184,7 +184,6 @@ function! Identify()
 endfunction
 
 function! FilterToNewWindow()
-    " exe '!chmod +x ' . @%
     let TempFile = tempname()
     let SaveModified = &modified
     exe 'w ' . TempFile
@@ -412,6 +411,7 @@ call ale#linter#Define('html', {
 \})
 let g:ale_linters = {}
 let g:ale_linters.html = ['customhtmlhint']
+let g:ale_linters.python = ['flake8']
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
