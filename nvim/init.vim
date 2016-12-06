@@ -132,6 +132,11 @@ Plug 'NovaDev94/lightline-onedark'  " lightline theme let g:lightline.colorschem
 " Use :Ack to search with ag (mapped to <leader>a )
 Plug 'mileszs/ack.vim'
 
+" Project wide find and replace
+" :Far foo bar **/*.py
+" :Fardo
+Plug 'brooth/far.vim'
+
 " The :EasyAlign command
 Plug 'junegunn/vim-easy-align'
 
