@@ -59,7 +59,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'moll/vim-bbye'
 "
 " Show git status stull in guter column (next to numbers)
-Plug 'airblade/vim-gitgutter'
+" temporary disabled
+" Plug 'airblade/vim-gitgutter'
 
 " Git integration, do :Gdiff, :Gblame, :Gremove and more
 Plug 'tpope/vim-fugitive'
@@ -417,6 +418,7 @@ call ale#linter#Define('html', {
 \})
 let g:ale_linters = {}
 let g:ale_linters.html = ['customhtmlhint']
+let g:ale_python_flake8_executable = '/home/tibi/tools/bin/flake8'
 let g:ale_linters.python = ['flake8']
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
