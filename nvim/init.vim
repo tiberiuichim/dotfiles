@@ -42,9 +42,10 @@ call plug#begin('~/.vim/nvim-plugged')
 " and Vim 8 while you edit your text files.
 " See https://github.com/maralla/validator.vim for a better one??
 " or https://github.com/neomake/neomake
+
 Plug 'w0rp/ale'
 " Plug 'scrooloose/syntastic'
-"
+
 " Helpers for writing vim scripts: :PP (pretty print), :Runtime (reload
 " runtime), zS (show syntax groups),
 Plug 'tpope/vim-scriptease'
@@ -89,34 +90,35 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Colorthemes
 Plug 'AlessandroYorba/Alduin'
-Plug 'AlessandroYorba/Despacio'
-Plug 'AlessandroYorba/Sierra'
+"   Plug 'AlessandroYorba/Despacio'
+"   Plug 'AlessandroYorba/Sierra'
 Plug 'MaxSt/FlatColor'
-Plug 'chriskempson/tomorrow-theme', {'rtp':'vim'}
-Plug 'iCyMind/NeoSolarized'
-Plug 'jacoborus/tender.vim'
-Plug 'jonathanfilip/vim-lucius'
-Plug 'joshdick/onedark.vim'
-Plug 'nanotech/jellybeans.vim'
-Plug 'rakr/vim-two-firewatch'
-Plug 'romainl/Apprentice'
-Plug 'tomasr/molokai'
-Plug 'chriskempson/base16-vim'
-Plug 'nanotech/jellybeans.vim'
-Plug 'vim-scripts/256-jungle'
-Plug 'croaker/mustang-vim'
-Plug 'zeis/vim-kolor'
-Plug 'jnurmine/Zenburn'
-Plug 'w0ng/vim-hybrid'
-Plug 'morhetz/gruvbox'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'dikiaap/minimalist'
+"   Plug 'chriskempson/tomorrow-theme', {'rtp':'vim'}
+"   Plug 'iCyMind/NeoSolarized'
+"   Plug 'jacoborus/tender.vim'
+"   Plug 'jonathanfilip/vim-lucius'
+"   Plug 'joshdick/onedark.vim'
+"   Plug 'nanotech/jellybeans.vim'
+"   Plug 'rakr/vim-two-firewatch'
+"   Plug 'romainl/Apprentice'
+"   Plug 'tomasr/molokai'
+"   Plug 'chriskempson/base16-vim'
+"   Plug 'nanotech/jellybeans.vim'
+"   Plug 'vim-scripts/256-jungle'
+"   Plug 'croaker/mustang-vim'
+"   Plug 'zeis/vim-kolor'
+"   Plug 'jnurmine/Zenburn'
+"   Plug 'w0ng/vim-hybrid'
+"   Plug 'morhetz/gruvbox'
+"   Plug 'NLKNguyen/papercolor-theme'
+"   Plug 'dikiaap/minimalist'
 
-" Plug 'goatslacker/mango.vim'
-" Plug 'tpope/vim-vividchalk'
-"
+"   "   " Plug 'goatslacker/mango.vim'
+"   "   " Plug 'tpope/vim-vividchalk'
+"   "   "
 " changes cursor shape to beam in insert mode
-Plug 'jszakmeister/vim-togglecursor'
+" bug: inserts q in terminal
+"""" Plug 'jszakmeister/vim-togglecursor'
 
 " allow changing between different physical environments adequate settings with
 " :Thematic something
@@ -133,10 +135,10 @@ Plug 'NovaDev94/lightline-onedark'  " lightline theme let g:lightline.colorschem
 " Use :Ack to search with ag (mapped to <leader>a )
 Plug 'mileszs/ack.vim'
 
-" Project wide find and replace
-" :Far foo bar **/*.py
-" :Fardo
-Plug 'brooth/far.vim'
+"   " Project wide find and replace
+"   " :Far foo bar **/*.py
+"   " :Fardo
+"   Plug 'brooth/far.vim'
 
 " The :EasyAlign command
 Plug 'junegunn/vim-easy-align'
