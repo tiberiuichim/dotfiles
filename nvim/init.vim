@@ -60,8 +60,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'moll/vim-bbye'
 "
 " Show git status stull in guter column (next to numbers)
-" temporary disabled
-" Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
 " Git integration, do :Gdiff, :Gblame, :Gremove and more
 Plug 'tpope/vim-fugitive'
@@ -116,10 +115,6 @@ Plug 'MaxSt/FlatColor'
 "   "   " Plug 'goatslacker/mango.vim'
 "   "   " Plug 'tpope/vim-vividchalk'
 "   "   "
-" changes cursor shape to beam in insert mode
-" bug: inserts q in terminal
-"""" Plug 'jszakmeister/vim-togglecursor'
-
 " allow changing between different physical environments adequate settings with
 " :Thematic something
 Plug 'reedes/vim-thematic'
@@ -146,16 +141,22 @@ Plug 'junegunn/vim-easy-align'
 " Show indent guides
 Plug 'Yggdroot/indentLine'
 
-" Always highlight enclosing tags
-" Plug 'valloric/matchtagalways'
-
-" Tabline / bufferline plugins. Not all of them work with airline
-" See vim-buftabline github page for alternatives
-" Plug 'ap/vim-buftabline'
 
 " Adds :Gundo, a visual tree of the undo
 Plug 'sjl/gundo.vim'
 
+" changes cursor shape to beam in insert mode
+" bug: inserts q in terminal
+if !exists('$TMUX')     " only allow in non-tmux sessions, has display bug
+    Plug 'jszakmeister/vim-togglecursor'
+endif
+
+" ======== Plugins with problems ===========
+" Always highlight enclosing tags
+" Plug 'valloric/matchtagalways'
+" Tabline / bufferline plugins. Not all of them work with airline
+" See vim-buftabline github page for alternatives
+" Plug 'ap/vim-buftabline'
 " Adds cx<motion> to exchange texts between them. Has problems with plug
 " Plug 'tommcdo/vimexchange'
 
