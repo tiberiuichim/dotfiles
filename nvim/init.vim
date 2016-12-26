@@ -69,7 +69,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'sheerun/vim-polyglot'
 
 " Python 'tags' in a tagbar
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 
 " Python fix code with F8
 Plug 'tell-k/vim-autopep8'
