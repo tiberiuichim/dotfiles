@@ -85,7 +85,8 @@ Plug 'tomtom/tcomment_vim'
 Plug 'tpope/vim-surround'
 
 " EditorConfig, global/per project configuration of whitespace settings
-Plug 'editorconfig/editorconfig-vim'
+" TODO: this adds time to startup, delay
+" Plug 'editorconfig/editorconfig-vim'
 
 " Colorthemes
 Plug 'AlessandroYorba/Alduin'
