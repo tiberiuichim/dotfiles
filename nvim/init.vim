@@ -89,8 +89,9 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Colorthemes
 Plug 'AlessandroYorba/Alduin'
-"   Plug 'AlessandroYorba/Despacio'
-"   Plug 'AlessandroYorba/Sierra'
+Plug 'AlessandroYorba/Despacio'
+Plug 'AlessandroYorba/Sierra'
+" Plug 'AlessandroYorba/Arcadia' " not a scheme yet
 Plug 'MaxSt/FlatColor'
 "   Plug 'chriskempson/tomorrow-theme', {'rtp':'vim'}
 "   Plug 'iCyMind/NeoSolarized'
@@ -293,11 +294,17 @@ if (g:my_machine ==# 'laptop')
     " highlight CursorLine guibg=#020310
     " highlight Normal guifg=#e0e0e0 guibg=#2C3E50
     set background=dark
+    " let g:alduin_Dragon_Aspect = 1              " almost black background
     let g:alduin_Shout_Become_Ethereal = 1      " black background
-    let g:alduin_Shout_Aura_Whisper = 1         " underline matching parens
-    let g:alduin_Shout_Fire_Breath = 0          " adds dark red color
-    let g:alduin_Shout_Animal_Allegiance = 1    " remove background from strings
-    colo alduin
+    " let g:alduin_Shout_Aura_Whisper = 1         " underline matching parens
+    " let g:alduin_Shout_Fire_Breath = 0          " adds dark red color
+    " let g:alduin_Shout_Animal_Allegiance = 1    " remove background from strings
+
+    " let g:despacio_Sunset = 1
+    " let g:despacio_Twilight = 1
+    let g:despacio_Midnight = 1
+
+    colorscheme despacio
 elseif (g:my_machine ==# 'desktop')
     set background=dark
     colorscheme flatcolor
@@ -319,10 +326,6 @@ highlight ColorColumn guibg=#2a0111
 " highlight OverLength guibg=#592929
 " match OverLength /\%81v.\+/
 " highlight the column at 80 chars
-
-" let g:despacio_Sunset = 1
-" let g:despacio_Twilight = 1
-" let g:despacio_Midnight = 1
 
 " space open/closes folds
 nnoremap <space> za
