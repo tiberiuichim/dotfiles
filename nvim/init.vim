@@ -444,6 +444,7 @@ if executable('ag')
   " let g:ackprg = 'ag --nogroup --nocolor --column'
 endif
 " dont jump to quickfix window immediately
+" TODO: see how to configure ag https://gist.github.com/manasthakur/5afd3166a14bbadc1dc0f42d070bd746
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack!<Space>
 
