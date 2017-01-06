@@ -54,8 +54,8 @@ Plug 'tpope/vim-scriptease'
 Plug 'scrooloose/nerdtree'
 
 " Vim file manager
-" Plug 'Shougo/unite.vim'     " dependency for vimfiler
-" Plug 'Shougo/vimfiler.vim'
+Plug 'Shougo/unite.vim'     " dependency for vimfiler
+Plug 'Shougo/vimfiler.vim'
 
 " Show git status icons for files, in NerdTree
 Plug 'Xuyuanp/nerdtree-git-plugin'
