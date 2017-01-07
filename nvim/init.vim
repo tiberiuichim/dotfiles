@@ -5,6 +5,16 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+function! Identify()
+    let l:h = hostname()
+    if match(l:h, 'Lenovo') > -1
+        return 'laptop'
+    else
+        return 'desktop'
+    endif
+endfunction
+let g:my_machine = Identify()
+
 " TODO: add install of htmlhint and custom ~/.htmlhintrc
 " {
 "     "tagname-lowercase": true,
@@ -54,8 +64,10 @@ Plug 'tpope/vim-scriptease'
 Plug 'scrooloose/nerdtree'
 
 " Vim file manager
-" Plug 'Shougo/unite.vim'     " dependency for vimfiler
-" Plug 'Shougo/vimfiler.vim'
+if (g:my_machine ==# 'desktop') " on laptop it crashes nvim. :(
+    Plug 'Shougo/unite.vim'     " dependency for vimfiler
+    Plug 'Shougo/vimfiler.vim'
+endif
 
 " Show git status icons for files, in NerdTree
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -157,6 +169,8 @@ if !exists('$TMUX')     " only allow in non-tmux sessions, has display bug
     Plug 'jszakmeister/vim-togglecursor'
 endif
 
+Plug 'ConradIrwin/vim-bracketed-paste'      " automatically set paste mode based on bracketed-paste terminal support
+
 " ======== Plugins with problems ===========
 " Always highlight enclosing tags
 " Plug 'valloric/matchtagalways'
@@ -190,15 +204,6 @@ function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
   exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 
-function! Identify()
-    let l:h = hostname()
-    if match(l:h, 'Lenovo') > -1
-        return 'laptop'
-    else
-        return 'desktop'
-    endif
-endfunction
-
 function! FilterToNewWindow()
     let TempFile = tempname()
     let SaveModified = &modified
@@ -220,7 +225,6 @@ command! FW call FilterToNewWindow()
 " Some of this stuff is lifted from sensible.vim
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:my_machine = Identify()
 
 syntax enable
 
