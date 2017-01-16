@@ -123,7 +123,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'mgee/lightline-bufferline'    " , {'branch': 'add-ordinal-buffer-numbering'}
 Plug 'NovaDev94/lightline-onedark'  " lightline theme let g:lightline.colorscheme = 'onedark'
 
-
 " ========== Language Support =========
 Plug 'w0rp/ale'
 " Plug 'scrooloose/syntastic'
@@ -134,9 +133,16 @@ Plug 'w0rp/ale'
 
 " Everything programming language syntax and indent
 " Plug 'sheerun/vim-polyglot'
+Plug 'python-mode/python-mode'
+"
+" Plug 'hdima/python-syntax'
 
 " Python fix code with F8
 Plug 'tell-k/vim-autopep8'
+
+" Format selection with :Neoformat
+" Format selection in a different format :Neoformat! javascript
+Plug 'sbdchd/neoformat'
 
 " Python 'tags' in a tagbar
 " Plug 'majutsushi/tagbar'
