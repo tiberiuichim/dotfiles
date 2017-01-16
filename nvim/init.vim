@@ -48,20 +48,28 @@ filetype plugin indent on
 
 call plug#begin('~/.vim/nvim-plugged')
 "
-" ALE (Asynchronous Lint Engine) is a plugin for providing linting in NeoVim
-" and Vim 8 while you edit your text files.
-" See https://github.com/maralla/validator.vim for a better one??
-" or https://github.com/neomake/neomake
-
-Plug 'w0rp/ale'
-" Plug 'scrooloose/syntastic'
-
 " Helpers for writing vim scripts: :PP (pretty print), :Runtime (reload
 " runtime), zS (show syntax groups),
 Plug 'tpope/vim-scriptease'
 
+" Vim Substitute as operator plugin
+Plug 'kana/vim-operator-user'   " dependency of vim-operator-substitute
+Plug 'milsen/vim-operator-substitute'
+"
+" Toggle comments with tcc
+Plug 'tomtom/tcomment_vim'
+
+" Change surrounding parens: cs'"
+Plug 'tpope/vim-surround'
+
+"
+" ==================== File managers
+
 " The inimitable NerdTree
 Plug 'scrooloose/nerdtree'
+"
+" Show git status icons for files, in NerdTree
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Vim file manager
 if (g:my_machine ==# 'desktop') " on laptop it crashes nvim. :(
@@ -69,8 +77,7 @@ if (g:my_machine ==# 'desktop') " on laptop it crashes nvim. :(
     Plug 'Shougo/vimfiler.vim'
 endif
 
-" Show git status icons for files, in NerdTree
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" ================== Enhancements to vim's functionality
 
 " BufferBye, gives :Bdelete command to delete buffers
 Plug 'moll/vim-bbye'
@@ -81,84 +88,8 @@ Plug 'airblade/vim-gitgutter'
 " Git integration, do :Gdiff, :Gblame, :Gremove and more
 Plug 'tpope/vim-fugitive'
 
-" Everything programming language syntax and indent
-Plug 'sheerun/vim-polyglot'
-
-" Python 'tags' in a tagbar
-" Plug 'majutsushi/tagbar'
-
-" Python fix code with F8
-Plug 'tell-k/vim-autopep8'
-
-" Vim Substitute as operator plugin
-Plug 'kana/vim-operator-user'   " dependency of vim-operator-substitute
-Plug 'milsen/vim-operator-substitute'
-
-" Toggle comments with tcc
-Plug 'tomtom/tcomment_vim'
-
-" Change surrounding parens: cs'"
-Plug 'tpope/vim-surround'
-
-" EditorConfig, global/per project configuration of whitespace settings
-" TODO: this adds time to startup, delay
-" Plug 'editorconfig/editorconfig-vim'
-
-" Colorthemes
-Plug 'AlessandroYorba/Alduin'
-Plug 'AlessandroYorba/Despacio'
-Plug 'AlessandroYorba/Sierra'
-" Plug 'AlessandroYorba/Arcadia' " not a scheme yet
-Plug 'MaxSt/FlatColor'
-"   Plug 'chriskempson/tomorrow-theme', {'rtp':'vim'}
-"   Plug 'iCyMind/NeoSolarized'
-"   Plug 'jacoborus/tender.vim'
-"   Plug 'jonathanfilip/vim-lucius'
-"   Plug 'joshdick/onedark.vim'
-"   Plug 'nanotech/jellybeans.vim'
-"   Plug 'rakr/vim-two-firewatch'
-"   Plug 'romainl/Apprentice'
-"   Plug 'tomasr/molokai'
-"   Plug 'chriskempson/base16-vim'
-"   Plug 'nanotech/jellybeans.vim'
-"   Plug 'vim-scripts/256-jungle'
-"   Plug 'croaker/mustang-vim'
-"   Plug 'zeis/vim-kolor'
-"   Plug 'jnurmine/Zenburn'
-"   Plug 'w0ng/vim-hybrid'
-"   Plug 'morhetz/gruvbox'
-"   Plug 'NLKNguyen/papercolor-theme'
-"   Plug 'dikiaap/minimalist'
-
-"   "   " Plug 'goatslacker/mango.vim'
-"   "   " Plug 'tpope/vim-vividchalk'
-"   "   "
-" allow changing between different physical environments adequate settings with
-" :Thematic something
-Plug 'reedes/vim-thematic'
-
-" Preview css colors
-Plug 'ap/vim-css-color'
-
-" Nice colors in status bar
-Plug 'itchyny/lightline.vim'
-Plug 'mgee/lightline-bufferline'    " , {'branch': 'add-ordinal-buffer-numbering'}
-Plug 'NovaDev94/lightline-onedark'  " lightline theme let g:lightline.colorscheme = 'onedark'
-
-" Use :Ack to search with ag (mapped to <leader>a )
-Plug 'mileszs/ack.vim'
-
-"   " Project wide find and replace
-"   " :Far foo bar **/*.py
-"   " :Fardo
-"   Plug 'brooth/far.vim'
-
-" The :EasyAlign command
-Plug 'junegunn/vim-easy-align'
-
 " Show indent guides
 Plug 'Yggdroot/indentLine'
-
 
 " Adds :Gundo, a visual tree of the undo
 Plug 'sjl/gundo.vim'
@@ -168,10 +99,62 @@ Plug 'sjl/gundo.vim'
 if !exists('$TMUX')     " only allow in non-tmux sessions, has display bug
     Plug 'jszakmeister/vim-togglecursor'
 endif
+"
+" automatically set paste mode based on 'bracketed-paste' terminal support
+Plug 'ConradIrwin/vim-bracketed-paste'
+"
+" allow changing between different physical environments adequate settings with
+" :Thematic something
+Plug 'reedes/vim-thematic'
+"
+" Use :Ack to search with ag (mapped to <leader>a )
+Plug 'mileszs/ack.vim'
 
-Plug 'ConradIrwin/vim-bracketed-paste'      " automatically set paste mode based on bracketed-paste terminal support
+" The :EasyAlign command
+Plug 'junegunn/vim-easy-align'
+
+" Project wide find and replace
+" :Far foo bar **/*.py
+" :Fardo
+Plug 'brooth/far.vim'
+
+" Nice colors in status bar
+Plug 'itchyny/lightline.vim'
+Plug 'mgee/lightline-bufferline'    " , {'branch': 'add-ordinal-buffer-numbering'}
+Plug 'NovaDev94/lightline-onedark'  " lightline theme let g:lightline.colorscheme = 'onedark'
+
+
+" ========== Language Support =========
+Plug 'w0rp/ale'
+" Plug 'scrooloose/syntastic'
+" ALE (Asynchronous Lint Engine) is a plugin for providing linting in NeoVim
+" and Vim 8 while you edit your text files.
+" See https://github.com/maralla/validator.vim for a better one??
+" or https://github.com/neomake/neomake
+
+" Everything programming language syntax and indent
+" Plug 'sheerun/vim-polyglot'
+
+" Python fix code with F8
+Plug 'tell-k/vim-autopep8'
+
+" Python 'tags' in a tagbar
+" Plug 'majutsushi/tagbar'
+"
+" Preview css colors
+Plug 'ap/vim-css-color'
+
+" ============ Colorthemes
+Plug 'AlessandroYorba/Alduin'
+Plug 'AlessandroYorba/Despacio'
+Plug 'AlessandroYorba/Sierra'
+" Plug 'AlessandroYorba/Arcadia' " not a scheme yet
+Plug 'MaxSt/FlatColor'
 
 " ======== Plugins with problems ===========
+" EditorConfig, global/per project configuration of whitespace settings
+" TODO: this adds time to startup, delay
+" Plug 'editorconfig/editorconfig-vim'
 " Always highlight enclosing tags
 " Plug 'valloric/matchtagalways'
 " Tabline / bufferline plugins. Not all of them work with airline
@@ -706,6 +689,28 @@ nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 "     printf "\n";
 " }'
 "
+"   Plug 'chriskempson/tomorrow-theme', {'rtp':'vim'}
+"   Plug 'iCyMind/NeoSolarized'
+"   Plug 'jacoborus/tender.vim'
+"   Plug 'jonathanfilip/vim-lucius'
+"   Plug 'joshdick/onedark.vim'
+"   Plug 'nanotech/jellybeans.vim'
+"   Plug 'rakr/vim-two-firewatch'
+"   Plug 'romainl/Apprentice'
+"   Plug 'tomasr/molokai'
+"   Plug 'chriskempson/base16-vim'
+"   Plug 'nanotech/jellybeans.vim'
+"   Plug 'vim-scripts/256-jungle'
+"   Plug 'croaker/mustang-vim'
+"   Plug 'zeis/vim-kolor'
+"   Plug 'jnurmine/Zenburn'
+"   Plug 'w0ng/vim-hybrid'
+"   Plug 'morhetz/gruvbox'
+"   Plug 'NLKNguyen/papercolor-theme'
+"   Plug 'dikiaap/minimalist'
+
+"   Plug 'goatslacker/mango.vim'
+"   Plug 'tpope/vim-vividchalk'
 " Tmux
 "
 " Currently, vim can not work well in tmux. But neovim works perfect.
