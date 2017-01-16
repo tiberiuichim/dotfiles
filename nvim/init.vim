@@ -48,21 +48,6 @@ filetype plugin indent on
 
 call plug#begin('~/.vim/nvim-plugged')
 "
-" Helpers for writing vim scripts: :PP (pretty print), :Runtime (reload
-" runtime), zS (show syntax groups),
-Plug 'tpope/vim-scriptease'
-
-" Vim Substitute as operator plugin
-Plug 'kana/vim-operator-user'   " dependency of vim-operator-substitute
-Plug 'milsen/vim-operator-substitute'
-"
-" Toggle comments with tcc
-Plug 'tomtom/tcomment_vim'
-
-" Change surrounding parens: cs'"
-Plug 'tpope/vim-surround'
-
-"
 " ==================== File managers
 
 " The inimitable NerdTree
@@ -78,7 +63,25 @@ if (g:my_machine ==# 'desktop') " on laptop it crashes nvim. :(
 endif
 
 " ================== Enhancements to vim's functionality
+"
+" Helpers for writing vim scripts: :PP (pretty print), :Runtime (reload
+" runtime), zS (show syntax groups),
+Plug 'tpope/vim-scriptease'
 
+" Vim Substitute as operator plugin
+Plug 'kana/vim-operator-user'   " dependency of vim-operator-substitute
+Plug 'milsen/vim-operator-substitute'
+"
+" Toggle comments with tcc
+Plug 'tomtom/tcomment_vim'
+
+" Change surrounding parens: cs'"
+Plug 'tpope/vim-surround'
+
+" :set ft=outlow for outliner functionality
+" lines starting with ===, [x], [-] or [ ], followed by a space are topics.
+Plug 'lifepillar/vim-outlaw'
+"
 " BufferBye, gives :Bdelete command to delete buffers
 Plug 'moll/vim-bbye'
 "
