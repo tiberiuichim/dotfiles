@@ -97,6 +97,11 @@ Plug 'Yggdroot/indentLine'
 " Adds :Gundo, a visual tree of the undo
 Plug 'sjl/gundo.vim'
 
+" Adds :ClipBrd, a buffer for the clipboar
+" Plug 'vim-scripts/genutils'     " dependency for clipbrd
+" Plug 'vim-scripts/clipbrd'
+" Plug 'svermeulen/vim-easyclip'
+
 " changes cursor shape to beam in insert mode
 " bug: inserts q in terminal
 if !exists('$TMUX')     " only allow in non-tmux sessions, has display bug
@@ -276,7 +281,23 @@ set writebackup
 " set foldenable    " this makes the folds closed when file is opened
 " set ignorecase        " when searching, ignore case if all letters lowercase
 " set smartcase     " override ignorecase if term has caps
-" set clipboard+=unnamed      "also include system clipboard in the default yank registers
+
+" clipboard configuration
+set clipboard=unnamedplus      "EasyClip + Vim + system clipboard
+" let g:EasyClipShareYanks=1      " share clipboard between vim instances, saves in $HOME/.easyclip
+" let g:EasyClipShareYanksFile='.easyclip'
+" let g:EasyClipShareYanksDirectory='$HOME'
+" let g:EasyClipUseCutDefaults = 0        " don't introduce the m command, make the x instead
+"
+" nmap x <Plug>MoveMotionPlug
+" xmap x <Plug>MoveMotionXPlug
+" nmap xx <Plug>MoveMotionLinePlug
+"
+" let g:EasyClipUsePasteToggleDefaults = 0
+"
+" nmap <c-f> <plug>EasyClipSwapPasteForward
+" nmap <c-d> <plug>EasyClipSwapPasteBackwards
+
 " Specify the behavior when switching between buffers
 try
     set switchbuf=useopen,usetab,newtab
