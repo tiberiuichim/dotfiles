@@ -158,6 +158,7 @@ Plug 'AlessandroYorba/Alduin'
 Plug 'AlessandroYorba/Despacio'
 Plug 'AlessandroYorba/Sierra'
 " Plug 'AlessandroYorba/Arcadia' " not a scheme yet
+Plug 'AlessandroYorba/Monrovia'
 Plug 'MaxSt/FlatColor'
 
 " ======== Plugins with problems ===========
