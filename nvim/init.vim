@@ -101,6 +101,7 @@ Plug 'sjl/gundo.vim'
 " Plug 'vim-scripts/genutils'     " dependency for clipbrd
 " Plug 'vim-scripts/clipbrd'
 " Plug 'svermeulen/vim-easyclip'
+Plug  'maxbrunsfeld/vim-yankstack'
 
 " changes cursor shape to beam in insert mode
 " bug: inserts q in terminal
@@ -165,6 +166,8 @@ Plug 'AlessandroYorba/Sierra'
 " Plug 'AlessandroYorba/Arcadia' " not a scheme yet
 Plug 'AlessandroYorba/Monrovia'
 Plug 'MaxSt/FlatColor'
+Plug 'fcpg/vim-fahrenheit'       " earthy colors similar to alduin, starred by AlessandroYorba
+
 
 " ======== Plugins with problems ===========
 " EditorConfig, global/per project configuration of whitespace settings
@@ -411,6 +414,14 @@ let s:py3 = expand("$HOME/tools3/bin/python")
 if executable(s:py3)
     let g:python3_host_prog = s:py3
 endif
+
+let g:pymode_lint = 0       " disable pymode linting
+let g:pymode_rope = 0       " disable pymode rope support
+let g:pymode_rope_completion = 0       " disable completition on insert mode and  hit .
+let g:pymode_syntax = 1
+let g:pymode_syntax_slow_sync = 1       " slower syntax mode, better at docstrings
+let g:pymode_syntax_all = 1             " enable all python highlights
+let g:pymode_syntax_indent_errors = g:pymode_syntax_all     " highlight indent errors
 
 " buftabline configuration
 let g:buftabline_numbers = 2    " show buffer position next to each buffer label
