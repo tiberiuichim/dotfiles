@@ -127,6 +127,9 @@ Plug 'junegunn/vim-easy-align'
 " :Fardo
 Plug 'brooth/far.vim'
 
+" vim two-panes outliner
+Plug 'vim-voom/VOoM'
+
 " Nice colors in status bar
 Plug 'itchyny/lightline.vim'
 Plug 'mgee/lightline-bufferline'    " , {'branch': 'add-ordinal-buffer-numbering'}
@@ -154,7 +157,7 @@ Plug 'tell-k/vim-autopep8'
 Plug 'sbdchd/neoformat'
 
 " Python 'tags' in a tagbar
-" Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 "
 " Preview css colors
 Plug 'ap/vim-css-color'
