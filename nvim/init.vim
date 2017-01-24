@@ -146,6 +146,7 @@ Plug 'w0rp/ale'
 " Everything programming language syntax and indent
 " Plug 'sheerun/vim-polyglot'
 Plug 'python-mode/python-mode'
+Plug 'posva/vim-vue'
 "
 " Plug 'hdima/python-syntax'
 
@@ -154,7 +155,7 @@ Plug 'tell-k/vim-autopep8'
 
 " Format selection with :Neoformat
 " Format selection in a different format :Neoformat! javascript
-Plug 'sbdchd/neoformat'
+" Plug 'sbdchd/neoformat'
 
 " Python 'tags' in a tagbar
 Plug 'majutsushi/tagbar'
@@ -544,9 +545,12 @@ augroup configgroup
     autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
     autocmd BufNewFile,BufRead *.pt setlocal filetype=html
-    autocmd BufNewFile,BufRead *.vue setlocal filetype=html
+    autocmd BufNewFile,BufRead *.vue setlocal filetype=vue
     autocmd BufNewFile,BufRead *.zcml setlocal filetype=xml
 
+    autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 noexpandtab
+    autocmd Filetype vuew setlocal ts=2 sw=2 sts=0 noexpandtab
+    autocmd Filetype css setlocal ts=2 sw=2 sts=0 noexpandtab
     autocmd Filetype html setlocal ts=2 sw=2 expandtab
 
     autocmd FileType python setlocal commentstring=#\ %s
