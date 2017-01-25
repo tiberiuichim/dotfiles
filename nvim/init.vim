@@ -146,7 +146,9 @@ Plug 'w0rp/ale'
 " Everything programming language syntax and indent
 " Plug 'sheerun/vim-polyglot'
 Plug 'python-mode/python-mode'
-Plug 'posva/vim-vue'
+" these are slow?
+" Plug 'posva/vim-vue'
+" Plug 'pangloss/vim-javascript'
 "
 " Plug 'hdima/python-syntax'
 
@@ -546,12 +548,14 @@ augroup configgroup
     autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
 
     autocmd BufNewFile,BufRead *.pt setlocal filetype=html
-    autocmd BufNewFile,BufRead *.vue setlocal filetype=vue
     autocmd BufNewFile,BufRead *.zcml setlocal filetype=xml
 
-    autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 noexpandtab
-    autocmd Filetype vuew setlocal ts=2 sw=2 sts=0 noexpandtab
-    autocmd Filetype css setlocal ts=2 sw=2 sts=0 noexpandtab
+    autocmd BufNewFile,BufRead *.js setlocal filetype=javascript
+    autocmd Filetype javascript setlocal ts=2 sw=2 sts=0 expandtab
+    autocmd BufNewFile,BufRead *.js setlocal ts=2 sw=2 sts=0 expandtab
+    autocmd BufNewFile,BufRead *.vue setlocal filetype=html ts=2 sw=2 sts=0 expandtab
+    autocmd Filetype vue setlocal ts=2 sw=2 sts=0 expandtab
+    autocmd Filetype css setlocal ts=2 sw=2 sts=0 expandtab
     autocmd Filetype html setlocal ts=2 sw=2 expandtab
 
     autocmd FileType python setlocal commentstring=#\ %s
