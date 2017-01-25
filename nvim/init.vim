@@ -411,6 +411,7 @@ imap <A-j> <ESC><c-w>j
 "
 let s:py2 = expand("$HOME/tools/bin/python2")
 if executable(s:py2)
+    let g:autopep8_cmd = expand("$HOME/tools/bin/autopep8")
     let g:python_host_prog = s:py2
 endif
 let s:py3 = expand("$HOME/tools3/bin/python")
@@ -461,7 +462,7 @@ call ale#linter#Define('html', {
 \})
 let g:ale_linters = {}
 let g:ale_linters.html = ['customhtmlhint']
-let g:ale_python_flake8_executable = '/home/tibi/tools/bin/flake8'
+let g:ale_python_flake8_executable = expand("$HOME/tools/bin/flake8")
 let g:ale_linters.python = ['flake8']
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
