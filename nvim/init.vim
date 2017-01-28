@@ -130,10 +130,14 @@ Plug 'brooth/far.vim'
 " vim two-panes outliner
 Plug 'vim-voom/VOoM'
 
-" Nice colors in status bar
+" Lightline colors in status bar
 Plug 'itchyny/lightline.vim'
 Plug 'mgee/lightline-bufferline'    " , {'branch': 'add-ordinal-buffer-numbering'}
 Plug 'NovaDev94/lightline-onedark'  " lightline theme let g:lightline.colorscheme = 'onedark'
+
+" Other UI enhancements
+Plug 'gelus/vim-buffer-enhancement'     " renumber buffer, <count><leader><c-6> renumbers to said <count>
+Plug 'jlanzarotta/bufexplorer'          " buffer list in buffer, open \be (normal) \bs (split), \bv (split vertical)
 
 " ========== Language Support =========
 Plug 'w0rp/ale'
