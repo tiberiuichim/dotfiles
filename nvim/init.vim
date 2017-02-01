@@ -97,12 +97,6 @@ Plug 'Yggdroot/indentLine'
 " Adds :Gundo, a visual tree of the undo
 Plug 'sjl/gundo.vim'
 
-" Adds :ClipBrd, a buffer for the clipboar
-" Plug 'vim-scripts/genutils'     " dependency for clipbrd
-" Plug 'vim-scripts/clipbrd'
-" Plug 'svermeulen/vim-easyclip'
-Plug  'maxbrunsfeld/vim-yankstack'
-
 " changes cursor shape to beam in insert mode
 " bug: inserts q in terminal
 if !exists('$TMUX')     " only allow in non-tmux sessions, has display bug
@@ -747,6 +741,12 @@ nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 "     printf "\n";
 " }'
 "
+
+" Adds :ClipBrd, a buffer for the clipboar
+" Plug 'vim-scripts/genutils'     " dependency for clipbrd
+" Plug 'vim-scripts/clipbrd'
+" Plug 'svermeulen/vim-easyclip'
+" Plug  'maxbrunsfeld/vim-yankstack'
 "   Plug 'chriskempson/tomorrow-theme', {'rtp':'vim'}
 "   Plug 'iCyMind/NeoSolarized'
 "   Plug 'jacoborus/tender.vim'
