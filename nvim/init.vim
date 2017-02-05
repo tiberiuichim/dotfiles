@@ -5,6 +5,18 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+let s:py2 = expand("$HOME/tools/bin/python2")
+if executable(s:py2)
+    let g:autopep8_cmd = expand("$HOME/tools/bin/autopep8")
+    let g:python_host_prog = s:py2
+else
+    echom "not installed"
+endif
+let s:py3 = expand("$HOME/tools3/bin/python")
+if executable(s:py3)
+    let g:python3_host_prog = s:py3
+endif
+
 function! Identify()
     let l:h = hostname()
     if match(l:h, 'Lenovo') > -1
@@ -410,16 +422,6 @@ imap <A-j> <ESC><c-w>j
 
 " setup proper python support
 "
-let s:py2 = expand("$HOME/tools/bin/python2")
-if executable(s:py2)
-    let g:autopep8_cmd = expand("$HOME/tools/bin/autopep8")
-    let g:python_host_prog = s:py2
-endif
-let s:py3 = expand("$HOME/tools3/bin/python")
-if executable(s:py3)
-    let g:python3_host_prog = s:py3
-endif
-
 let g:pymode_lint = 0       " disable pymode linting
 let g:pymode_rope = 0       " disable pymode rope support
 let g:pymode_rope_completion = 0       " disable completition on insert mode and  hit .
